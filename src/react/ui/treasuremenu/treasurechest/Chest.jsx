@@ -1,3 +1,4 @@
+
 import styles from "./Chest.module.css";
 
 export default function Chest({
@@ -13,7 +14,7 @@ export default function Chest({
         >
             {!isOpen ? (
                 <img
-                    src="/assets/images/waiting_treasure_2.png"
+                    src={`${import.meta.env.BASE_URL}assets/images/waiting_treasure_2.png`}
                     alt=""
                     onAnimationEnd={onAnimationEnd}
                 />
@@ -21,13 +22,13 @@ export default function Chest({
                 <>
                     <img
                         className={styles.chest_bottom}
-                        src="/assets/images/chest_bottom.png"
+                        src={`${import.meta.env.BASE_URL}assets/images/chest_bottom.png`}
                         alt=""
                     />
 
                     <img
                         className={styles.chest_top}
-                        src="/assets/images/chest_top.png"
+                        src={`${import.meta.env.BASE_URL}assets/images/chest_top.png`}
                         alt=""
                     />
                 </>

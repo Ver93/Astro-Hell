@@ -7,10 +7,10 @@ import PauseMenu from "./pausemenu/PauseMenu.jsx";
 import MainMenu from "./mainmenu/MainMenu.jsx";
 
 const TREASURE_ASSETS = [
-    "/assets/images/waiting_treasure_2.png",
-    "/assets/images/chest_bottom.png",
-    "/assets/images/chest_top.png",
-    "/assets/images/items_row.png",
+    `${import.meta.env.BASE_URL}assets/images/waiting_treasure_2.png`,
+    `${import.meta.env.BASE_URL}assets/images/chest_bottom.png`,
+    `${import.meta.env.BASE_URL}assets/images/chest_top.png`,
+    `${import.meta.env.BASE_URL}assets/images/items_row.png`,
 ];
 
 function preloadImage(src) {
