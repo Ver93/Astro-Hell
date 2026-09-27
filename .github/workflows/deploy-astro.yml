@@ -2,7 +2,7 @@ name: Deploy Astro Jump Web-application
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   deploy:
@@ -10,18 +10,30 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project
         run: npm run build
+
+      - name: Remove old build
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            rm -rf /var/www/portfolio/astro-jump-web/*
+            rm -rf /var/www/portfolio/astro-jump-web/.[!.]*
+            rm -rf /var/www/portfolio/astro-jump-web/..?*
 
       - name: Copy build to server
         uses: appleboy/scp-action@v0.1.4
