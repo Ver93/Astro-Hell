@@ -2,7 +2,7 @@ name: Deploy Astro Jump Web-application
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   deploy:
