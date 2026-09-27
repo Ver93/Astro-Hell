@@ -1,0 +1,36 @@
+.pauseMenu {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    z-index: 1000;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.title {
+    margin: 0 0 20px 0;
+
+    color: white;
+    font-size: 64px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
+}

@@ -1,0 +1,52 @@
+.screen {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+}
+
+
+.frame {
+    width: 1000px;
+    max-width: 90vw;
+
+    padding: 36px;
+
+    border: 6px solid #ffffff;
+
+    background: #111118;
+
+    box-shadow:
+        12px 12px 0 #000000,
+        inset 0 0 0 4px #444450;
+}
+
+.title {
+    margin-bottom: 30px;
+
+    text-align: center;
+
+    font-size: 28px;
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    color: #ffffff;
+
+    text-shadow:
+        4px 4px 0 #000000;
+}
+
+.upgrades {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 24px;
+}

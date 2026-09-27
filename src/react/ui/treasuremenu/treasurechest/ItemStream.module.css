@@ -1,0 +1,78 @@
+.itemStream {
+    position: absolute;
+
+    width: 32px;
+    height: 110px;
+
+    left: 8px;
+    top: -79px;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 4;
+
+    image-rendering: pixelated;
+}
+
+.itemTrack {
+    display: flex;
+
+    flex-direction: column;
+
+    width: 32px;
+
+    animation:
+        itemScroll
+        1s
+        linear
+        infinite;
+}
+
+.itemFrame {
+    width: 32px;
+    height: 32px;
+
+    flex: 0 0 32px;
+
+    background-image:
+        url("/assets/images/items_row.png");
+
+    background-repeat: no-repeat;
+
+    background-size:
+        480px 32px;
+
+    image-rendering: pixelated;
+}
+
+@keyframes itemScroll {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-480px);
+    }
+}
+
+.itemStream.exit {
+    animation:
+        itemStreamExit
+        300ms
+        ease-in
+        forwards;
+}
+
+@keyframes itemStreamExit {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+}

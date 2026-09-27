@@ -1,0 +1,91 @@
+.treasure {
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    overflow: hidden;
+
+    transform: none;
+    transform-origin: center;
+
+    image-rendering: pixelated;
+
+    cursor: pointer;
+}
+
+.treasure img {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 960px;
+    height: 48px;
+
+    max-width: none;
+
+    image-rendering: pixelated;
+
+    pointer-events: auto;
+}
+
+.treasure.idle:hover img {
+    animation:
+        treasureHover
+        700ms
+        steps(6)
+        infinite;
+}
+
+@keyframes treasureHover {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: -288px;
+    }
+}
+
+.treasure.opening img {
+    animation:
+        treasureOpen
+        2.1s
+        steps(19)
+        forwards;
+}
+
+@keyframes treasureOpen {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: -912px;
+    }
+}
+
+.treasure.opened > img:not(.chest_bottom):not(.chest_top) {
+    left: -912px;
+}
+
+.chest_bottom {
+    width: 48px !important;
+    height: 48px !important;
+
+    left: 0 !important;
+    top: 0;
+
+    z-index: 3;
+}
+
+.chest_top {
+    width: 48px !important;
+    height: 48px !important;
+
+    left: 0 !important;
+    top: 0;
+
+    z-index: 1;
+}

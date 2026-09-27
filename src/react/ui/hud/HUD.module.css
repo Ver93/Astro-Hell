@@ -1,0 +1,34 @@
+.topHud {
+    position: absolute;
+    top: 17px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 4px;
+}
+
+/* Gör icons lika bred som XP-baren */
+.icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;        /* tar XP-barens width */
+    max-width: 420px;   /* matchar XP-barens width automatiskt */
+    margin-top: 6px;
+    margin-left: 10px
+}
+
+.weapons {
+    display: flex;
+    gap: 6px;
+}
+
+.passives {
+    display: flex;
+    gap: 6px;
+}

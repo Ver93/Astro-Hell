@@ -1,0 +1,85 @@
+
+.spotlightLeft,
+.spotlightRight {
+
+    position:absolute;
+    width:400px;
+    height:120%;
+    top:-10%;
+    z-index:3;
+    opacity:.5;
+    will-change:transform;
+
+}
+
+
+.spotlightLeft {
+
+    left:-200px;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,255,255,.35),
+        transparent
+    );
+
+    animation:
+        spotlightLeftAnim 2.5s infinite alternate ease-in-out;
+
+}
+
+
+
+.spotlightRight {
+
+    right:-200px;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,0,180,.35),
+        transparent
+    );
+
+    animation:
+        spotlightRightAnim 2.5s infinite alternate ease-in-out;
+
+}
+
+
+
+@keyframes spotlightLeftAnim {
+
+    from {
+        transform:
+            translateX(0)
+            rotate(20deg);
+    }
+
+    to {
+        transform:
+            translateX(250px)
+            rotate(20deg);
+    }
+
+}
+
+
+@keyframes spotlightRightAnim {
+
+    from {
+        transform:
+            translateX(0)
+            rotate(-20deg);
+    }
+
+    to {
+        transform:
+            translateX(-250px)
+            rotate(-20deg);
+    }
+
+}

@@ -1,0 +1,48 @@
+.screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.menu {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.chestRow {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.continueButton {
+    position: fixed;
+
+    left: 50%;
+    bottom: 150px;
+
+    transform: translateX(-50%);
+}
+    
+@keyframes continueAppear {
+    0% {
+        opacity: 0;
+        transform:
+            translateX(-50%)
+            translateY(12px)
+            scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+}

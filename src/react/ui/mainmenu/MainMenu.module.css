@@ -1,0 +1,30 @@
+.mainMenu {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 25px;
+    overflow: hidden;
+
+    z-index: 10;
+}
+
+.title {
+    margin: 0 0 100px;
+
+    font-family: "Press Start 2P", monospace;
+    font-size: clamp(40px, 7vw, 90px);
+    color: #fff;
+    text-align: center;
+    letter-spacing: 6px;
+
+    text-shadow:
+        4px 4px 0 #5b21ff,
+        8px 8px 0 #111827;
+
+    animation: titleFloat 3s ease-in-out infinite;
+}

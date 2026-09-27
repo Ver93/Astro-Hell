@@ -1,0 +1,26 @@
+.crt {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.04),
+        rgba(255, 255, 255, 0.04) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+}
+
+.crt::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: radial-gradient(
+        ellipse,
+        transparent 55%,
+        rgba(0, 0, 0, 0.65)
+    );
+}

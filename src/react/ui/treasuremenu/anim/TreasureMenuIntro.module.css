@@ -1,0 +1,40 @@
+.intro {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+
+    z-index: 999;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #ffd86b;
+    text-shadow: 0 0 20px rgba(255, 215, 100, 0.8),
+                 0 0 40px rgba(255, 215, 100, 0.4);
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.08);
+        opacity: 0.85;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

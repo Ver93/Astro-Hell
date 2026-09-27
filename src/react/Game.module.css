@@ -1,0 +1,27 @@
+.gameContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: black;
+}
+
+.uiLayer {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.uiLayer button,
+.uiLayer input,
+.uiLayer a {
+    pointer-events: auto;
+}
+
+.currencyWrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+}

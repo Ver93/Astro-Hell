@@ -1,0 +1,105 @@
+.rewardSplash {
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    left: 0;
+    top: 0;
+
+    pointer-events: none;
+
+    z-index: 30;
+}
+
+.rewardSplash span {
+    position: absolute;
+
+    left: 23px;
+    top: 23px;
+
+    width: 3px;
+    height: 3px;
+
+    background: #ffffff;
+
+    image-rendering: pixelated;
+
+    animation:
+        rewardParticle
+        500ms
+        steps(5)
+        forwards;
+}
+
+.rewardParticle1 {
+    --rx: -24px;
+    --ry: -22px;
+}
+
+.rewardParticle2 {
+    --rx: 0px;
+    --ry: -30px;
+}
+
+.rewardParticle3 {
+    --rx: 24px;
+    --ry: -22px;
+}
+
+.rewardParticle4 {
+    --rx: 30px;
+    --ry: 0px;
+}
+
+.rewardParticle5 {
+    --rx: 24px;
+    --ry: 22px;
+}
+
+.rewardParticle6 {
+    --rx: 0px;
+    --ry: 30px;
+}
+
+.rewardParticle7 {
+    --rx: -24px;
+    --ry: 22px;
+}
+
+.rewardParticle8 {
+    --rx: -30px;
+    --ry: 0px;
+}
+
+@keyframes rewardParticle {
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(0, 0)
+            scale(1.5);
+    }
+
+    35% {
+        opacity: 1;
+
+        transform:
+            translate(
+                calc(var(--rx) * 0.45),
+                calc(var(--ry) * 0.45)
+            )
+            scale(1);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(
+                var(--rx),
+                var(--ry)
+            )
+            scale(0);
+    }
+}

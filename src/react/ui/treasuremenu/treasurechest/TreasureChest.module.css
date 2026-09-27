@@ -1,0 +1,115 @@
+.treasureContainer {
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    left: -30vw;
+
+    overflow: visible;
+
+    transform: scale(5);
+    transform-origin: center;
+
+    image-rendering: pixelated;
+
+    z-index: 300;
+}
+
+.treasure1 {
+    top: 50%;
+
+    animation:
+        treasureFlyIn1
+        1s
+        ease-out
+        forwards;
+}
+
+.treasure2 {
+    top: 50%;
+
+    animation:
+        treasureFlyIn2
+        1s
+        ease-out
+        200ms
+        forwards;
+}
+
+.treasure3 {
+    top: 50%;
+
+    animation:
+        treasureFlyIn3
+        1s
+        ease-out
+        400ms
+        forwards;
+}
+
+@keyframes treasureFlyIn1 {
+    from {
+        left: -30vw;
+    }
+
+    to {
+        left: 25%;
+    }
+}
+
+@keyframes treasureFlyIn2 {
+    from {
+        left: -30vw;
+    }
+
+    to {
+        left: 50%;
+    }
+}
+
+@keyframes treasureFlyIn3 {
+    from {
+        left: -30vw;
+    }
+
+    to {
+        left: 75%;
+    }
+}
+
+.yellowBanner {
+    position: absolute;
+
+    width: 24px;
+    height: 132px;
+
+    left: 12px;
+    top: -100px;
+
+    background: rgba(255, 255, 0, 0.473);
+
+    image-rendering: pixelated;
+
+    pointer-events: none;
+
+    z-index: 2;
+
+    transform-origin: bottom center;
+
+    animation:
+        bannerShootOut
+        200ms
+        ease-out
+        forwards;
+}
+
+@keyframes bannerShootOut {
+    from {
+        transform: scaleY(0);
+    }
+
+    to {
+        transform: scaleY(1);
+    }
+}

@@ -1,0 +1,105 @@
+.splash {
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    left: 0;
+    top: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+.splash span {
+    position: absolute;
+
+    left: 22px;
+    top: 20px;
+
+    width: 5px;
+    height: 5px;
+
+    background: #fff700;
+
+    image-rendering: pixelated;
+
+    box-shadow:
+        0 0 0 2px rgba(255, 255, 0, 0.35);
+
+    animation:
+        splashParticle
+        450ms
+        steps(5)
+        forwards;
+}
+
+.splash1 {
+    --x: -38px;
+    --y: -30px;
+}
+
+.splash2 {
+    --x: 0px;
+    --y: -48px;
+}
+
+.splash3 {
+    --x: 38px;
+    --y: -30px;
+}
+
+.splash4 {
+    --x: 48px;
+    --y: 0px;
+}
+
+.splash5 {
+    --x: 38px;
+    --y: 30px;
+}
+
+.splash6 {
+    --x: 0px;
+    --y: 48px;
+}
+
+.splash7 {
+    --x: -38px;
+    --y: 30px;
+}
+
+.splash8 {
+    --x: -48px;
+    --y: 0px;
+}
+
+@keyframes splashParticle {
+    0% {
+        transform:
+            translate(0, 0)
+            scale(1.4);
+
+        opacity: 1;
+    }
+
+    35% {
+        transform:
+            translate(
+                calc(var(--x) * 0.45),
+                calc(var(--y) * 0.45)
+            )
+            scale(1);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(var(--x), var(--y))
+            scale(0);
+
+        opacity: 0;
+    }
+}
