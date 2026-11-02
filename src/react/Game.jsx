@@ -10,7 +10,7 @@ export default function Game() {
         canvasRef,
         gameRef,
         ready,
-    } = usePhaserGame(1920, 1080);
+    } = usePhaserGame(1280, 760);
 
     return (
         <div className={styles.gameContainer}>
