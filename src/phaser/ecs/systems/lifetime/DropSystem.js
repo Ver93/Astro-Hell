@@ -44,7 +44,7 @@ export default class DropSystem {
                         return;
                     }
 
-                    if (Math.random() < 1 * (1 + player.entity_passive_luck)){
+                    if (Math.random() < 0.0001 * (1 + player.entity_passive_luck)){
                         const dynamite = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_TREASURE);
                         dynamite.entity_position_x = e.entity_position_x;
                         dynamite.entity_position_y = e.entity_position_y;
