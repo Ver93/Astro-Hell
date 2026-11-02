@@ -1,34 +1,73 @@
+
+.hud {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
 .topHud {
     position: absolute;
-    top: 17px;
+    top: clamp(8px, 2vh, 17px);
     left: 50%;
     transform: translateX(-50%);
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: clamp(3px, 0.5vh, 6px);
 
-    gap: 4px;
+    width: min(94vw, 420px);
 }
 
-/* Gör icons lika bred som XP-baren */
 .icons {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    width: 100%;        /* tar XP-barens width */
-    max-width: 420px;   /* matchar XP-barens width automatiskt */
-    margin-top: 6px;
-    margin-left: 10px
+    width: 100%;
+    margin-top: clamp(3px, 0.8vh, 6px);
+    padding: 0 4px;
+    box-sizing: border-box;
 }
 
-.weapons {
-    display: flex;
-    gap: 6px;
-}
-
+.weapons,
 .passives {
     display: flex;
-    gap: 6px;
+    gap: clamp(3px, 0.8vw, 6px);
+}
+
+/* Smala mobiler */
+@media (max-width: 480px) {
+    .topHud {
+        width: min(96vw, 360px);
+        top: 8px;
+    }
+
+    .icons {
+        padding: 0 2px;
+    }
+
+    .weapons,
+    .passives {
+        gap: 3px;
+    }
+}
+
+/* Surfplattor */
+@media (min-width: 481px) and (max-width: 900px) {
+    .topHud {
+        width: min(90vw, 420px);
+    }
+}
+
+/* Liggande mobil */
+@media (max-height: 500px) and (orientation: landscape) {
+    .topHud {
+        top: 5px;
+        transform: translateX(-50%) scale(0.8);
+        transform-origin: top center;
+    }
 }
