@@ -20,12 +20,15 @@ const TEXTURE = {
     PROJECTILE_BOOT:            110,
     PROJECTILE_CHEESE:          111,
     PROJECTILE_PLUNGER:         112,
+    PROJECTILE_RAY:             113,
     
 
     WEAPON_REVOLVER:            200,
     WEAPON_ROMAN_CANDLE:        201,
     WEAPON_CHEESE:              202,
-    WEAWPON_MOON:               203,
+    WEAPON_MOON:                203,
+    WEAPON_RAYGUN:              204,
+
 
     PASSIVE_MAGNET:             300,
     PASSIVE_HEALTH_GEN:         301,

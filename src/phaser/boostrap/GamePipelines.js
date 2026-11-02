@@ -81,5 +81,10 @@ export default class GamePipelines {
     reset(){
         this.playerPipeline.reset();
         this.renderPipeline.reset();
+        this.movementPipeline.reset();
+        this.combatPipeline.reset();
+        this.physicsPipeline.reset();
+        this.worldPipeline.reset();
+        this.lifetimePipeline.reset();
     }
 }

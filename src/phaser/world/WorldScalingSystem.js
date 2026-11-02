@@ -10,17 +10,21 @@ export default class WorldScalingSystem {
     }
 
     update(seconds) {
-        // Reserv för framtida dynamisk scaling.
+
     }
 
     getDifficulty(time) {
         const progress =
-            Math.min(
-                time / this.demoDuration,
-                1
+            Math.max(
+                0,
+                Math.min(time / this.demoDuration, 1)
             );
 
-        return progress * this.maxDifficulty;
+        return (
+            progress *
+            progress *
+            (3 - 2 * progress)
+        ) * this.maxDifficulty;
     }
 
     getEnemyCount(wave, time) {
@@ -28,8 +32,7 @@ export default class WorldScalingSystem {
             this.getDifficulty(time);
 
         return Math.floor(
-            wave.maxEnemies *
-            (1 + difficulty)
+            wave.maxEnemies * (1 + difficulty)
         );
     }
 

@@ -22,6 +22,7 @@ export default class BehaviorSystem {
         this.boomerang(player, ecs, dt, seconds);
         this.bounce(player, ecs, dt, seconds);
         this.revolver(player, ecs, dt, seconds);
+        this.ray(player, ecs, dt, seconds);
         this.cheese(player, ecs, dt, seconds);
         this.jars(player, ecs, dt, seconds);
         this.boot(player, ecs, dt, seconds);
@@ -239,6 +240,20 @@ export default class BehaviorSystem {
             p.entity_position_y += p.entity_velocity_y * dt;
 
             // p.trailEffect.follow(p.entity_sprite_object);
+        }
+    }
+
+    ray(player, ecs, dt, seconds) {
+        const projectiles = ecs.components[ENTITY_TYPE.PROJECTILE_RAY];
+        if (!projectiles) return;
+
+        for (const id of projectiles) {
+            const p = ecs.getEntity(id);
+            if (!p || !p.entity_active) continue;
+
+            p.entity_position_x += p.entity_velocity_x * dt;
+            p.entity_position_y += p.entity_velocity_y * dt;
+
         }
     }
 

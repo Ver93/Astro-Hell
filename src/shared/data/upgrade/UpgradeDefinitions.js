@@ -4,17 +4,12 @@ import TEXTURE from "../character/Texture";
 
 const UpgradeDefinitions = {
 
-    // -------------------------
-    // WEAPONS
-    // -------------------------
-
     [WEAPON.BANANARANG]: {
         id: WEAPON.BANANARANG,
         type: "weapon",
         name: "Banana Rang",
         description: "Flings spinning bananas that slice through enemies and whip back to the player. Higher levels unleash absurd amounts of flying fruit.",
         texture: TEXTURE.PROJECTILE_BANANARANG,
-
         levels: {
             1: { projectile_count: 4, projectiles_per_shot: 4 },
             2: { projectile_count: 8, projectiles_per_shot: 8 },
@@ -24,13 +19,27 @@ const UpgradeDefinitions = {
         },
     },
 
+    [WEAPON.RAYGUN]: {
+        id: WEAPON.RAYGUN,
+        type: "weapon",
+        name: "Ray Gun",
+        description: "Fires a concentrated beam of energy that pierces through enemies.",
+        texture: TEXTURE.WEAPON_RAYGUN,
+        levels: {
+            1: { fire_interval: 900, cooldown: 1000 },
+            2: { fire_interval: 850, cooldown: 1000 },
+            3: { fire_interval: 750, cooldown: 1000 },
+            4: { fire_interval: 500, cooldown: 1000 },
+            5: { fire_interval: 250, cooldown: 1000 },
+        },
+    },
+
     [WEAPON.FLOPPY_SHIELD]: {
         id: WEAPON.FLOPPY_SHIELD,
         type: "weapon",
         name: "Floppy Shield",
         description: "Summons floppy disks that orbit the player like a retro forcefield, smacking enemies that get too close.",
         texture: TEXTURE.PROJECTILE_FLOPPY,
-
         levels: {
             1: { projectile_count: 2 },
             2: { projectile_count: 4 },
@@ -46,7 +55,6 @@ const UpgradeDefinitions = {
         name: "Revolver",
         description: "Fires precise shots toward nearby enemies. Higher levels unleash more bullets per burst, shredding targets with overwhelming firepower.",
         texture: TEXTURE.WEAPON_REVOLVER,
-
         levels: {
             1: { projectile_count: 5, projectiles_per_shot: 5 },
             2: { projectile_count: 10, projectiles_per_shot: 10 },
@@ -62,7 +70,6 @@ const UpgradeDefinitions = {
         name: "Rubber Ducky",
         description: "Throws a rubber duck that bounces chaotically around the screen, ricocheting off enemies and walls.",
         texture: TEXTURE.PROJECTILE_RUBBER_DUCK,
-
         levels: {
             1: { projectile_count: 5 },
             2: { projectile_count: 10 },
@@ -78,7 +85,6 @@ const UpgradeDefinitions = {
         name: "Honey Jar",
         description: "Drops a jar of sticky honey that splashes on impact, slowing and damaging enemies caught in the goo.",
         texture: TEXTURE.PROJECTILE_HONEY_JAR,
-
         levels: {
             1: { projectile_count: 2, projectiles_per_shot: 2 },
             2: { projectile_count: 4, projectiles_per_shot: 4 },
@@ -92,9 +98,8 @@ const UpgradeDefinitions = {
         id: WEAPON.ROMAN_CANDLE,
         type: "weapon",
         name: "Roman Candle",
-        description: "Launches colorful fireworks that zig‑zag through the air before exploding in a burst of damage.",
+        description: "Launches colorful fireworks that zig-zag through the air before exploding in a burst of damage.",
         texture: TEXTURE.WEAPON_ROMAN_CANDLE,
-
         levels: {
             1: { projectile_count: 3, projectiles_per_shot: 3, damage: 3, fire_interval: 180, explosion_radius: 120 },
             2: { projectile_count: 5, projectiles_per_shot: 5, damage: 4, fire_interval: 150, explosion_radius: 135 },
@@ -109,8 +114,7 @@ const UpgradeDefinitions = {
         type: "weapon",
         name: "Moon Pulse",
         description: "Creates a growing lunar aura around the player that pulses outward, damaging all enemies within its radius.",
-        texture: TEXTURE.WEAWPON_MOON,
-
+        texture: TEXTURE.WEAPON_MOON,
         levels: {
             1: { projectile_count: 1, projectiles_per_shot: 1, radius: 100, cooldown: 1900, damage: 10 },
             2: { projectile_count: 1, projectiles_per_shot: 1, radius: 120, cooldown: 1800, damage: 12 },
@@ -126,7 +130,6 @@ const UpgradeDefinitions = {
         name: "Moldy Cheese",
         description: "Surrounds the player with a foul-smelling cloud that periodically damages nearby enemies.",
         texture: TEXTURE.WEAPON_CHEESE,
-
         levels: {
             1: { projectile_count: 1, projectiles_per_shot: 1, radius: 100, cooldown: 1900, damage: 10 },
             2: { projectile_count: 1, projectiles_per_shot: 1, radius: 120, cooldown: 1800, damage: 12 },
@@ -142,7 +145,6 @@ const UpgradeDefinitions = {
         name: "Old Boot",
         description: "Throws an old boot in a high arc toward a random target. More boots mean more airborne footwear raining down on enemies.",
         texture: TEXTURE.PROJECTILE_BOOT,
-
         levels: {
             1: { projectile_count: 1 },
             2: { projectile_count: 2 },
@@ -152,14 +154,15 @@ const UpgradeDefinitions = {
         },
     },
 
-
     [PASSIVE.MAGNET]: {
         id: PASSIVE.MAGNET,
         type: "passive",
         name: "Item Magnet",
         description: "Increases pickup range, pulling experience and items toward the player from further away.",
         texture: TEXTURE.PASSIVE_MAGNET,
-        levels: { 1:{},2:{},3:{},4:{},5:{} },
+        levels: {
+            1: {}, 2: {}, 3: {}, 4: {}, 5: {},
+        },
     },
 
     [PASSIVE.LUCK]: {
@@ -168,7 +171,9 @@ const UpgradeDefinitions = {
         name: "Luck",
         description: "Boosts luck, increasing the chance for rare item drops and beneficial effects.",
         texture: TEXTURE.PASSIVE_LUCK,
-        levels: { 1:{},2:{},3:{},4:{},5:{} },
+        levels: {
+            1: {}, 2: {}, 3: {}, 4: {}, 5: {},
+        },
     },
 
     [PASSIVE.DAMAGE]: {
@@ -177,7 +182,9 @@ const UpgradeDefinitions = {
         name: "Damage",
         description: "Increases all damage dealt by the player’s weapons.",
         texture: TEXTURE.PASSIVE_DAMAGE,
-        levels: { 1:{},2:{},3:{},4:{},5:{} },
+        levels: {
+            1: {}, 2: {}, 3: {}, 4: {}, 5: {},
+        },
     },
 
     [PASSIVE.MOVE_SPEED]: {
@@ -185,8 +192,10 @@ const UpgradeDefinitions = {
         type: "passive",
         name: "Speed Boots",
         description: "Increases movement speed, letting the player dodge danger and reposition faster.",
-        texture: TEXTURE.PASSIVE_DAMAGE,
-        levels: { 1:{},2:{},3:{},4:{},5:{} },
+        texture: TEXTURE.PASSIVE_MOVE_SPEED,
+        levels: {
+            1: {}, 2: {}, 3: {}, 4: {}, 5: {},
+        },
     },
 
     [PASSIVE.EXPERIENCE]: {
@@ -195,7 +204,9 @@ const UpgradeDefinitions = {
         name: "Experience Tome",
         description: "Boosts experience gain, helping the player level up faster and unlock upgrades sooner.",
         texture: TEXTURE.PASSIVE_EXPERIENCE,
-        levels: { 1:{},2:{},3:{},4:{},5:{} },
+        levels: {
+            1: {}, 2: {}, 3: {}, 4: {}, 5: {},
+        },
     },
 };
 

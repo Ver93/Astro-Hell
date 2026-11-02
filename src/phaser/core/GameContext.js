@@ -45,19 +45,36 @@ export default class GameContext {
             ENTITY_TYPE.CHARACTER_ASTRO
         );
 
+        if (!player) {
+            console.error("Kunde inte skapa spelaren!");
+            this.player = null;
+            return;
+        }
+
         player.entity_position_x = this.game.scene.scale.width / 2;
         player.entity_position_y = this.game.scene.scale.height / 2;
-        
-        this.game.ecs.forEach((id, e) => {
 
-            if (e.entity_category === ENTITY_CATEGORY.PLAYER) {
+        // Hitta spelarens entity-ID i ECS
+        this.player = null;
+
+        this.game.ecs.forEach((id, entity) => {
+
+            if (entity === player) {
                 this.player = id;
             }
 
         });
+
+        if (this.player === null) {
+            console.error("Spelaren skapades men kunde inte hittas i ECS!");
+            return;
+        }
+
+        return this.player;
     }
 
     getFinalScore() {
+
         const levelScore = this.player_level * 100;
         const killScore = this.kills * 10;
         const crystalScore = this.crystals * 25;
@@ -65,8 +82,8 @@ export default class GameContext {
         return levelScore + killScore + crystalScore;
     }
 
-
     gameOver() {
+
         const score = this.getFinalScore();
 
         this.game.events.emitEvent("gameOver", {
@@ -77,29 +94,39 @@ export default class GameContext {
         });
     }
 
-
     addCrystal() {
+
         this.crystals += 1;
         this.updateHUD();
     }
 
     addExp() {
-        this.exp += (1 + (1 * this.game.ecs.getEntity(this.player).entity_passive_experience));
-        console.log(1 + (1 * this.game.ecs.getEntity(this.player).entity_passive_experience));
+
+        const player = this.game.ecs.getEntity(this.player);
+
+        if (!player) return;
+
+        this.exp += (
+            1 + (1 * (player.entity_passive_experience || 0))
+        );
 
         if (this.exp >= this.requiredExp) {
+
             this.exp -= this.requiredExp;
             this.player_level += 1;
-            const player = this.game.ecs.getEntity(this.player);
+
             player.entity_stats_health = player.entity_stats_max_health;
+
             this.game.upgradeMenu();
         }
 
         this.updateHUD();
     }
 
-    addKills(){
-        this.kills +=1;
+    addKills() {
+
+        this.kills += 1;
+        this.updateHUD();
     }
 
     getCurrentWeapons() {
@@ -110,7 +137,7 @@ export default class GameContext {
             return [];
         }
 
-        return player.entity_weapon_slots;
+        return player.entity_weapon_slots || [];
     }
 
     getCurrentPassives() {
@@ -121,7 +148,7 @@ export default class GameContext {
             return [];
         }
 
-        return player.entity_passive_slots;
+        return player.entity_passive_slots || [];
     }
 
     getHUDData() {
@@ -144,5 +171,32 @@ export default class GameContext {
             "updateHUD",
             this.getHUDData()
         );
+    }
+
+    reset() {
+
+        this.player = null;
+
+        this.crystals = 0;
+        this.exp = 0;
+        this.player_level = 1;
+        this.kills = 0;
+        this.requiredExp = 1;
+
+        this.input = {
+            moveX: 0,
+            moveY: 0
+        };
+
+        this.boost = false;
+
+        this.world = null;
+        this.level = null;
+
+        // Skapa en ny spelare
+        this.createPlayer();
+
+        // Uppdatera HUD efter reset
+        this.updateHUD();
     }
 }

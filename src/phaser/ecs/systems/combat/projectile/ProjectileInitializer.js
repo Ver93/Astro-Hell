@@ -1,4 +1,5 @@
 import BulletInitializer from "./BulletInitializer";
+import RayInitializer from "./RayInitializer";
 import FloppyInitializer from "./FloppyInitializer";
 import RubberDuckInitializer from "./RubberDuckInitializer";
 import HoneyJarInitializer from "./HoneyJarInitializer";
@@ -12,6 +13,7 @@ export default class ProjectileInitializer {
     constructor(game) {
         this.initializers = {
             [ENTITY_TYPE.PROJECTILE_BULLET]:      new BulletInitializer(game),
+            [ENTITY_TYPE.PROJECTILE_RAY]:         new RayInitializer(game),
             [ENTITY_TYPE.PROJECTILE_FLOPPY]:      new FloppyInitializer(game),
             [ENTITY_TYPE.PROJECTILE_RUBBER_DUCK]: new RubberDuckInitializer(game),
             [ENTITY_TYPE.PROJECTILE_HONEY_JAR]:   new HoneyJarInitializer(game),

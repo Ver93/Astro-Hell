@@ -5,6 +5,7 @@ import UpgradeMenu from "./upgrademenu/UpgradeMenu.jsx";
 import HUD from "./hud/HUD.jsx";
 import PauseMenu from "./pausemenu/PauseMenu.jsx";
 import MainMenu from "./mainmenu/MainMenu.jsx";
+import GameOverScreen from "./gameovermenu/GameOverScreen.jsx";
 
 const TREASURE_ASSETS = [
     `${import.meta.env.BASE_URL}assets/images/waiting_treasure_2.png`,
@@ -32,12 +33,13 @@ function preloadTreasureAssets() {
 
 export default function GameUI({ gameRef }) {
 
-    const [showMainMenu, setShowMainMenu]   = useState(true);
+    const [showMainMenu, setShowMainMenu] = useState(true);
     const [showTreasureMenu, setShowTreasureMenu] = useState(false);
     const [showUpgradeMenu, setShowUpgradeMenu] = useState(false);
     const [showPauseMenu, setShowPauseMenu] = useState(false);
     const [showScoreMenu, setShowScoreMenu] = useState(false);
     const [showHUD, setShowHUD] = useState(false);
+    const [hudKey, setHudKey] = useState(0);
 
     const [upgrades, setUpgrades] = useState([]);
     const [treasures, setTreasures] = useState([]);
@@ -48,7 +50,13 @@ export default function GameUI({ gameRef }) {
         currentWeapons: [],
     });
 
-    const [gameOverData, setGameOverData] = useState({});
+    const [gameOverData, setGameOverData] = useState({
+        kills: 0,
+        treasures: 0,
+        time: 0,
+        multiplier: 1,
+        score: 0,
+    });
 
     const treasureReady = useRef(false);
     const pendingTreasure = useRef(null);
@@ -61,8 +69,13 @@ export default function GameUI({ gameRef }) {
                 treasureReady.current = true;
 
                 if (pendingTreasure.current) {
-                    setTreasures(pendingTreasure.current);
+
+                    setTreasures(
+                        pendingTreasure.current
+                    );
+
                     pendingTreasure.current = null;
+
                     setShowTreasureMenu(true);
                 }
             })
@@ -85,78 +98,187 @@ export default function GameUI({ gameRef }) {
         const events = gameRef.current.events;
 
         const openTreasure = (treasures) => {
-            if (!Array.isArray(treasures) || treasures.length < 3) {
+
+            if (
+                !Array.isArray(treasures) ||
+                treasures.length < 3
+            ) {
                 return;
             }
 
             if (treasureReady.current) {
-                console.log(treasures);
+
                 setTreasures(treasures);
                 setShowTreasureMenu(true);
+
             } else {
+
                 pendingTreasure.current = treasures;
             }
         };
 
-        const mainMenu = () => {
-            closeMenus();
-            setShowMainMenu(true);
-        };
-
         const openUpgrade = (upgrades) => {
+
             setUpgrades(upgrades);
             setShowUpgradeMenu(true);
         };
 
         const handleShowHUD = () => {
+
             setShowHUD(true);
         };
 
         const updateHUD = (data) => {
+
             setHudData(data);
         };
 
-        const selectUpgrade = (upgrade) => {
+        const selectUpgrade = () => {
+
             closeMenus();
             setShowHUD(true);
         };
 
-        const selectTreasure = (treasures) => {
+        const selectTreasure = () => {
+
             setShowTreasureMenu(false);
             setShowHUD(true);
         };
 
         const pauseGame = () => {
+
             closeMenus();
             setShowPauseMenu(true);
         };
 
+        const mainMenu = () => {
+
+            closeMenus();
+            setShowMainMenu(true);
+        };
+
         const resumeGame = () => {
+
             closeMenus();
             setShowHUD(true);
         };
 
-        events.on("openTreasure", openTreasure);
-        events.on("openUpgrade", openUpgrade);
-        events.on("showHUD", handleShowHUD);
-        events.on("updateHUD", updateHUD);
-        events.on("selectUpgrade", selectUpgrade);
-        events.on("selectTreasure", selectTreasure);
-        events.on("pauseGame", pauseGame);
-        events.on("mainMenu", mainMenu);
-        events.on("resumeGame", resumeGame);
+        const gameOver = (stats) => {
+
+            closeMenus();
+
+            setGameOverData({
+                kills: stats?.kills ?? 0,
+                treasures: stats?.treasures ?? 0,
+                time: stats?.time ?? 0,
+                multiplier: stats?.multiplier ?? 1,
+                score: stats?.score ?? 0,
+            });
+
+            setShowScoreMenu(true);
+        };
+
+        events.on(
+            "openTreasure",
+            openTreasure
+        );
+
+        events.on(
+            "openUpgrade",
+            openUpgrade
+        );
+
+        events.on(
+            "showHUD",
+            handleShowHUD
+        );
+
+        events.on(
+            "updateHUD",
+            updateHUD
+        );
+
+        events.on(
+            "selectUpgrade",
+            selectUpgrade
+        );
+
+        events.on(
+            "selectTreasure",
+            selectTreasure
+        );
+
+        events.on(
+            "pauseGame",
+            pauseGame
+        );
+
+        events.on(
+            "mainMenu",
+            mainMenu
+        );
+
+        events.on(
+            "resumeGame",
+            resumeGame
+        );
+
+        events.on(
+            "gameOver",
+            gameOver
+        );
 
         return () => {
 
-            events.off("openTreasure", openTreasure);
-            events.off("openUpgrade", openUpgrade);
-            events.off("showHUD", handleShowHUD);
-            events.off("updateHUD", updateHUD);
-            events.off("selectUpgrade", selectUpgrade);
-            events.off("selectTreasure", selectTreasure);
-            events.off("pauseGame", pauseGame);
-            events.off("mainMenu", mainMenu);
-            events.off("resumeGame", resumeGame);
+            events.off(
+                "openTreasure",
+                openTreasure
+            );
+
+            events.off(
+                "openUpgrade",
+                openUpgrade
+            );
+
+            events.off(
+                "showHUD",
+                handleShowHUD
+            );
+
+            events.off(
+                "updateHUD",
+                updateHUD
+            );
+
+            events.off(
+                "selectUpgrade",
+                selectUpgrade
+            );
+
+            events.off(
+                "selectTreasure",
+                selectTreasure
+            );
+
+            events.off(
+                "pauseGame",
+                pauseGame
+            );
+
+            events.off(
+                "mainMenu",
+                mainMenu
+            );
+
+            events.off(
+                "resumeGame",
+                resumeGame
+            );
+
+            events.off(
+                "gameOver",
+                gameOver
+            );
         };
 
     }, [gameRef]);
@@ -173,40 +295,77 @@ export default function GameUI({ gameRef }) {
     };
 
     const handleResumeGame = () => {
+
         closeMenus();
         setShowHUD(true);
+
         gameRef.current.events.emit(
             "resumeGame"
         );
-    }
+    };
+
+    const handleRetry = () => {
+
+        closeMenus();
+        setShowHUD(true);
+
+        setHudKey(prev => prev + 1);
+
+        gameRef.current.events.emit(
+            "newGame"
+        );
+
+        gameRef.current.events.emit(
+            "startGame"
+        );
+    };
+
+    const handleMenu = () => {
+
+        closeMenus();
+        setShowMainMenu(true);
+
+        gameRef.current.events.emit(
+            "newGame"
+        );
+
+        gameRef.current.events.emit(
+            "mainMenu"
+        );
+    };
+
+    const handleStartGame = () => {
+
+        closeMenus();
+        setShowHUD(true);
+
+        gameRef.current.events.emit(
+            "startGame"
+        );
+    };
 
     const closeMenus = () => {
-        setShowMainMenu(false)
+
+        setShowMainMenu(false);
         setShowHUD(false);
         setShowPauseMenu(false);
         setShowTreasureMenu(false);
         setShowUpgradeMenu(false);
+        setShowScoreMenu(false);
     };
-
-    const handleStartGame = () => {
-        closeMenus();
-        setShowHUD(true);
-        gameRef.current.events.emit(
-            "startGame"
-        );
-    }
 
     return (
         <>
             {showMainMenu && (
                 <MainMenu
-                onStartGame={handleStartGame}
+                    onStartGame={handleStartGame}
                 />
             )}
 
             {showHUD && (
                 <HUD
                     data={hudData}
+                    key={hudKey}
                 />
             )}
 
@@ -230,12 +389,13 @@ export default function GameUI({ gameRef }) {
                 />
             )}
 
-            {/* {showGameOverScreen && (
-                <PauseMenu
-                    onResume={handleResumeGame}
+            {showScoreMenu && (
+                <GameOverScreen
+                    stats={gameOverData}
+                    onRetry={handleRetry}
+                    onMenu={handleMenu}
                 />
-            )} */}
-
+            )}
         </>
     );
 }

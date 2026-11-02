@@ -18,9 +18,11 @@ const ENTITY_TYPE = {
     PROJECTILE_PULSE:           108,
     PROJECTILE_BOOT:            109,
     PROJECTILE_CHEESE:          110,
+    PROJECTILE_RAY:             111,
 
     WEAPON_REVOLVER:            200,
     WEAPON_ROMAN_CANDLE:        201,
+    WEAPON_RAYGUN:              202,
 
     PASSIVE_MAGNET:             300,
     PASSIVE_HEALTH_GEN:         301,

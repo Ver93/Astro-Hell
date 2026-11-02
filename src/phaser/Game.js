@@ -1,3 +1,4 @@
+
 import GameEvents from "./boostrap/GameEvents.js";
 import GamePipelines from "./boostrap/GamePipelines.js";
 import GameSystems from "./boostrap/GameSystems.js";
@@ -21,29 +22,27 @@ import FireworkTrailEffect from "./effects/particle/FireworkTrailEffect.js";
 import OldCheeseCloudEffect from "./effects/particle/OldCheeseCloudEffect.js";
 import MoonPulseEffect from "./effects/particle/MoonPulseEffect.js";
 
-import DamageTextPool from "./effects/visual/DamageTextPool.js"
+import DamageTextPool from "./effects/visual/DamageTextPool.js";
 import FlashEffect from "./effects/visual/FlashEffect.js";
 import RevolverEffect from "./effects/particle/RevolverEffect.js";
 import HoneyEffect from "./effects/particle/HoneyEffect.js";
 import AudioManager from "./sound/AudioManager.js";
-import AssetRegistry from "../shared/assets/AssetRegistry.js";
 import SOUND from "../shared/data/sound/Sound.js";
-import { Sound } from "phaser";
 import GameOverState from "./states/GameOverState.js";
 
 export default class Game {
     constructor(scene) {
         this.scene = scene;
 
-        this.events         = null;
-        this.ecs            = null;
-        this.managers       = null;
-        this.systems        = null;
-        this.pipelines      = null;
-        
-        this.context        = null;
+        this.events = null;
+        this.ecs = null;
+        this.managers = null;
+        this.systems = null;
+        this.pipelines = null;
 
-        this.stateMachine   = null;
+        this.context = null;
+
+        this.stateMachine = null;
 
         this.fpsFrames = 0;
         this.fpsTimer = 0;
@@ -51,30 +50,57 @@ export default class Game {
         this.ms = 0;
     }
 
-    initialize(){
-        this.events         = new GameEvents(this);
-        this.ecs            = new EntityComponentSystem();
+    initialize() {
+        this.events = new GameEvents(this);
+        this.ecs = new EntityComponentSystem();
 
-        this.entity         = new EntityManager(this);
+        this.entity = new EntityManager(this);
 
-        this.context        = new GameContext(this);
+        this.context = new GameContext(this);
+
+        this.particle = new ParticleManager(this);
+
+        this.particle.add(
+            "trail",
+            () => new FireworkTrailEffect(this)
+        );
+
+        this.particle.add(
+            "upgrade",
+            new UpgradeParticleEffect(this)
+        );
+
+        this.particle.add(
+            "pulse",
+            new MoonPulseEffect(this)
+        );
+
+        this.particle.add(
+            "cloud",
+            new OldCheeseCloudEffect(this)
+        );
+
+        this.particle.add(
+            "flash",
+            new FlashEffect(this)
+        );
+
+        this.particle.add(
+            "revolver",
+            new RevolverEffect(this)
+        );
+
+        this.particle.add(
+            "honey",
+            new HoneyEffect(this)
+        );
+
         
-        this.particle       = new ParticleManager(this);
+        this.textPool = new DamageTextPool(this, 50);
         
-        this.particle.add("trail", () => new FireworkTrailEffect(this));
-
-        this.particle.add("upgrade", new UpgradeParticleEffect(this));
-        this.particle.add("pulse", new MoonPulseEffect(this));
-        this.particle.add("cloud", new OldCheeseCloudEffect(this));
-        this.particle.add("flash", new FlashEffect(this));
-        this.particle.add("revolver", new RevolverEffect(this));
-        this.particle.add("honey", new HoneyEffect(this));
-
-        this.textPool       = new DamageTextPool(this, 50);
-        
-        this.audio          = new AudioManager(this);
+        this.audio = new AudioManager(this);
         this.audio.initialize();
-    
+        
         this.audio.addSound(SOUND.UPGRADE, 0.25);
         this.audio.addSound(SOUND.SPACE, 0.25);
         this.audio.addSound(SOUND.PAUSE, 0.25);
@@ -88,101 +114,174 @@ export default class Game {
         this.audio.addSound(SOUND.POP, 0.25);
         this.audio.addSound(SOUND.PICKUP, 0.1);
         this.audio.addSound(SOUND.DYNAMITE, 0.15);
+        this.audio.addSound(SOUND.SCORE, 0.15);
+        this.audio.addSound(SOUND.RAY, 0.15);
+        this.audio.addLoop(SOUND.BOOST, 0.9);
         
         this.context.createPlayer();
         
-        this.upgrade        = new UpgradeManager(this);
-        this.managers       = new GameManagers(this);
-        this.systems        = new GameSystems(this);
-        this.pipelines      = new GamePipelines(this);
+        this.upgrade = new UpgradeManager(this);
+        this.managers = new GameManagers(this);
+        this.systems = new GameSystems(this);
+        this.pipelines = new GamePipelines(this);
         
         this.systems.backgroundSystem.create();
-    
-        this.stateMachine   = new StateMachine(this);
-        this.stateMachine.addState(GameStates.MENU,         new GameMenuState(this));
-        this.stateMachine.addState(GameStates.END,          new GameOverState(this));
-        this.stateMachine.addState(GameStates.PLAY,         new GamePlayState(this));
-        this.stateMachine.addState(GameStates.PAUSE,        new GamePauseState(this));
-        this.stateMachine.addState(GameStates.UPGRADE,      new GameUpgradeState(this));
-        this.stateMachine.addState(GameStates.TREASURE,     new GameTreasureState(this));
+
+        this.stateMachine = new StateMachine(this);
+
+        this.stateMachine.addState(
+            GameStates.MENU,
+            new GameMenuState(this)
+        );
+
+        this.stateMachine.addState(
+            GameStates.END,
+            new GameOverState(this)
+        );
+
+        this.stateMachine.addState(
+            GameStates.PLAY,
+            new GamePlayState(this)
+        );
+
+        this.stateMachine.addState(
+            GameStates.PAUSE,
+            new GamePauseState(this)
+        );
+
+        this.stateMachine.addState(
+            GameStates.UPGRADE,
+            new GameUpgradeState(this)
+        );
+
+        this.stateMachine.addState(
+            GameStates.TREASURE,
+            new GameTreasureState(this)
+        );
+
+        this.stateMachine.switchState(
+            GameStates.MENU
+        );
+    }
+
+    startGame() {
+        this.stateMachine.switchState(
+            GameStates.PLAY
+        );
+    }
+
+    resetGame() {
+        this.audio.reset();
+        this.systems.reset?.();
+        this.particle.reset();
+        this.textPool.reset?.();
+        this.pipelines.reset();
+        this.ecs.reset();
+
+        this.context.reset();
+
+        this.upgrade = new UpgradeManager(this);
+        this.managers = new GameManagers(this);
+        this.systems = new GameSystems(this);
+        this.pipelines = new GamePipelines(this);
+
         this.stateMachine.switchState(GameStates.MENU);
-        
+
+        this.context.updateHUD();
     }
 
-    startGame(){
-        this.stateMachine.switchState(GameStates.PLAY);
+    resumeGame() {
+        this.stateMachine.switchState(
+            GameStates.PLAY
+        );
     }
 
-    resumeGame(){
-        this.stateMachine.switchState(GameStates.PLAY); 
+    pauseGame() {
+        this.stateMachine.switchState(
+            GameStates.PAUSE
+        );
+
+        this.events.emitEvent(
+            "pauseGame"
+        );
     }
 
-    pauseGame(){
-        this.stateMachine.switchState(GameStates.PAUSE);
-        this.events.emitEvent("pauseGame");
+    endGame() {
+        this.stateMachine.switchState(
+            GameStates.END
+        );
+
+        const stats = {
+            kills: this.context.kills,
+            treasures: this.context.crystals,
+            level: this.context.player_level,
+            score: this.context.getFinalScore(),
+        };
+
+        this.events.emitEvent(
+            "gameOver",
+            stats
+        );
     }
 
-    endGame(){
-        this.stateMachine.switchState(GameStates.END);
-        this.events.emitEvent("runEnd");
-    }
-
-    treasureMenu(){
+    treasureMenu() {
         const treasures = this.upgrade.generate(3);
-        if(treasures.length <= 0) return;
-        this.events.emitEvent("openTreasure", treasures);
-        this.stateMachine.switchState(GameStates.TREASURE);
+
+        if (treasures.length <= 0) {
+            return;
+        }
+
+        this.events.emitEvent(
+            "openTreasure",
+            treasures
+        );
+
+        this.stateMachine.switchState(
+            GameStates.TREASURE
+        );
     }
 
-    upgradeMenu(){
+    upgradeMenu() {
         const upgrades = this.upgrade.generate(3);
-        if(upgrades.length <= 0) return;
-        this.events.emitEvent("openUpgrade", upgrades);
-        this.stateMachine.switchState(GameStates.UPGRADE);
+
+        if (upgrades.length <= 0) {
+            return;
+        }
+
+        this.events.emitEvent(
+            "openUpgrade",
+            upgrades
+        );
+
+        this.stateMachine.switchState(
+            GameStates.UPGRADE
+        );
     }
-
-
-
 
     update(time, delta) {
-
         const dt = delta / 16.6666;
         const seconds = delta / 1000;
 
         const frameStart = performance.now();
 
-        this.stateMachine.update(dt, seconds);
+        this.stateMachine.update(
+            dt,
+            seconds
+        );
+
         this.context.updateHUD();
 
         const frameMs =
             performance.now() - frameStart;
 
-        // console.log(this.ecs.getEntity(this.context.player));
-        // Fånga frames som sticker ut
-        if (frameMs > 8) {
-            // console.warn(
-            //     `UPDATE SPIKE: ${frameMs.toFixed(2)} ms | ` +
-            //     `Entities: ${this.ecs.countActiveEntities()}`
-            // );
-        }
-
         this.fpsFrames++;
         this.fpsTimer += seconds;
 
         if (this.fpsTimer >= 1) {
-
             this.fps = this.fpsFrames;
-
-            console.log(
-                `FPS: ${this.fps} | ` +
-                `Update: ${frameMs.toFixed(2)} ms | ` +
-                `Active Entities: ${this.ecs.countActiveEntities()}`
-            );
 
             this.fpsFrames = 0;
             this.fpsTimer = 0;
         }
     }
-
-
 }

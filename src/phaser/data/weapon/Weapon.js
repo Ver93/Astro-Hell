@@ -9,6 +9,7 @@ const WEAPON = {
     MOON_PULSE:     7,
     OLD_BOOT:       8,
     OLD_CHEESE:     9,
+    RAYGUN:         10,
 };
 
 export default WEAPON;

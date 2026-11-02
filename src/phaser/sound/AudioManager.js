@@ -585,4 +585,50 @@ export default class AudioManager {
 
         this.previousMusic = null;
     }
+
+    reset() {
+
+        // 1. Stop all registered loops
+        for (const key in this.loops) {
+
+            const sound = this.loops[key];
+
+            if (sound?.isPlaying || sound?.isPaused) {
+                sound.stop();
+            }
+        }
+
+        // 2. Stop and destroy active one-shot SFX
+        for (const key in this.activeSfx) {
+
+            for (const sound of this.activeSfx[key]) {
+
+                sound.stop();
+                sound.destroy();
+            }
+        }
+
+        // 3. Stop current music
+        if (this.currentMusic) {
+            this.currentMusic.stop();
+        }
+
+        // 4. Stop previous music if different
+        if (
+            this.previousMusic &&
+            this.previousMusic !== this.currentMusic
+        ) {
+            this.previousMusic.stop();
+        }
+
+        // 5. Reset references
+        this.currentMusic = null;
+        this.previousMusic = null;
+
+        // 6. Clear active sounds
+        this.activeSfx = {};
+
+        // 7. Reset cooldowns
+        this.lastPlayed = {};
+    }
 }

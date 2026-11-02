@@ -1,9 +1,23 @@
 export default class EntityComponentSystem {
+
     constructor(maxEntities = 10000) {
         this.max = maxEntities;
 
         this.alive = new Uint8Array(maxEntities);
         this.entities = new Array(maxEntities);
+
+        this.nextId = 1;
+        this.freeIds = [];
+
+        this.components = {};
+        this.categories = {};
+    }
+
+
+    reset() {
+        this.alive.fill(0);
+
+        this.entities.fill(undefined);
 
         this.nextId = 1;
         this.freeIds = [];
@@ -73,6 +87,7 @@ export default class EntityComponentSystem {
         return this.categories[category];
     }
 
+
     forEach(callback) {
         for (let id = 1; id < this.nextId; id++) {
             if (this.alive[id]) {
@@ -81,6 +96,7 @@ export default class EntityComponentSystem {
         }
     }
 
+
     addComponent(id, type) {
         if (!this.components[type]) {
             this.components[type] = [];
@@ -88,6 +104,7 @@ export default class EntityComponentSystem {
 
         this.components[type].push(id);
     }
+
 
     removeComponent(id, type) {
         const list = this.components[type];
@@ -102,6 +119,7 @@ export default class EntityComponentSystem {
         }
     }
 
+
     addCategory(id, category) {
         if (!this.categories[category]) {
             this.categories[category] = [];
@@ -109,6 +127,7 @@ export default class EntityComponentSystem {
 
         this.categories[category].push(id);
     }
+
 
     removeCategory(id, category) {
         const list = this.categories[category];
@@ -123,6 +142,7 @@ export default class EntityComponentSystem {
         }
     }
 
+
     countByType(type) {
         const list = this.components[type];
 
@@ -131,6 +151,7 @@ export default class EntityComponentSystem {
         return list.length;
     }
 
+
     countByCat(category) {
         const list = this.categories[category];
 
@@ -138,6 +159,7 @@ export default class EntityComponentSystem {
 
         return list.length;
     }
+
 
     countActiveEntities() {
         let count = 0;
@@ -154,6 +176,7 @@ export default class EntityComponentSystem {
 
         return count;
     }
+
 
     countActiveEntitiesByType(type) {
         const list = this.components[type];
@@ -174,6 +197,7 @@ export default class EntityComponentSystem {
 
         return count;
     }
+
 
     countActiveEntitiesByCat(cat) {
         const list = this.categories[cat];

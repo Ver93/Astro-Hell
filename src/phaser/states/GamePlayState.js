@@ -12,10 +12,10 @@ export default class GamePlayState extends State {
     }
 
     onUpdate(dt, seconds) {
-        this.game.managers.update(
-            dt,
-            seconds
-        );
+        // this.game.managers.update(
+        //     dt,
+        //     seconds
+        // );
 
         this.game.pipelines.update(
             dt,

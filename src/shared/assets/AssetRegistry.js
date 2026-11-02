@@ -24,14 +24,16 @@ const Images = {
     [TEXTURE.PROJECTILE_FIREWORK]:          `${BASE}assets/images/projectile_firework.png`,
     [TEXTURE.PROJECTILE_CHEESE]:            `${BASE}assets/images/projectile_cloud.png`,
     [TEXTURE.PROJECTILE_BOOT]:              `${BASE}assets/images/projectile_boot.png`,
+    [TEXTURE.PROJECTILE_RAY]:               `${BASE}assets/images/projectile_ray.png`,
 
     [TEXTURE.PARTICLE_HONEY]:               `${BASE}assets/images/particle_honey.png`,
     [TEXTURE.PARTICLE_HONEY_ENTTIY]:        `${BASE}assets/images/particle_honey_effect.png`,
 
     [TEXTURE.WEAPON_REVOLVER]:              `${BASE}assets/images/weapon_revolver_gun.png`,
     [TEXTURE.WEAPON_ROMAN_CANDLE]:          `${BASE}assets/images/weapon_roman_candle.png`,
-    [TEXTURE.WEAWPON_MOON]:                 `${BASE}assets/images/weapon_moon.png`,
+    [TEXTURE.WEAPON_MOON]:                  `${BASE}assets/images/weapon_moon.png`,
     [TEXTURE.WEAPON_CHEESE]:                `${BASE}assets/images/weapon_moldy_cheese.png`,
+    [TEXTURE.WEAPON_RAYGUN]:                `${BASE}assets/images/weapon_ray_gun.png`,
 
     [TEXTURE.ITEM_EXPERIENCE]:              `${BASE}assets/images/item_exp.png`,
     [TEXTURE.ITEM_DYNAMITE]:                `${BASE}assets/images/item_dynamite.png`,
@@ -64,7 +66,6 @@ const Sounds = {
     [SOUND.HIT]:                            `${BASE}assets/sounds/hit.mp3`,
     [SOUND.QUACK]:                          `${BASE}assets/sounds/quack.mp3`,
     [SOUND.GLASS]:                          `${BASE}assets/sounds/glass.mp3`,
-    // [SOUND.BOING]:                       `${BASE}assets/sounds/boing.mp3`,
     [SOUND.EXPLOSION]:                      `${BASE}assets/sounds/explosion.mp3`,
     [SOUND.SPLAT]:                          `${BASE}assets/sounds/splat.mp3`,
     [SOUND.REVOLVER]:                       `${BASE}assets/sounds/revolver.mp3`,
@@ -72,6 +73,9 @@ const Sounds = {
     [SOUND.POP]:                            `${BASE}assets/sounds/pop.mp3`,
     [SOUND.PICKUP]:                         `${BASE}assets/sounds/pickup.mp3`,
     [SOUND.DYNAMITE]:                       `${BASE}assets/sounds/dynamite.mp3`,
+    [SOUND.SCORE]:                          `${BASE}assets/sounds/score.mp3`,
+    [SOUND.BOOST]:                          `${BASE}assets/sounds/boost.mp3`,
+    [SOUND.RAY]:                            `${BASE}assets/sounds/ray.mp3`,
 };
 
 export default { Images, Sounds };

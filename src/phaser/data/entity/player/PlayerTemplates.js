@@ -30,7 +30,7 @@ const PlayerTemplates = {
         entity_passive_experience:      0,
         entity_passive_magnet_radius:   0,
         entity_passive_move_speed:      0,
-        entity_passive_luck:            0,
+        entity_passive_luck:            1,
         entity_passive_damage:          0,
 
         entity_boost:                   true,
@@ -65,11 +65,12 @@ const PlayerTemplates = {
             // {id: WEAPON.FLOPPY_SHIELD, level: 1, modifier: [], timer: 0, projectile_count: 0},
             // {id: WEAPON.BANANARANG, level: 1, modifier: [], timer: 0, projectile_count: 0},
             // {id: WEAPON.RUBBER_DUCKY, level: 1, modifier: [], timer: 0, projectile_count: 0},
-            {id: WEAPON.OLD_CHEESE, level: 1, modifier: [], timer: 0, projectile_count: 0},
+            // {id: WEAPON.OLD_CHEESE, level: 1, modifier: [], timer: 0, projectile_count: 0},
             // {id: WEAPON.HONEY_JAR, level: 1, modifier: [], timer: 0, projectile_count: 0},
             // {id: WEAPON.OLD_BOOT, level: 1, modifier: [], timer: 0, projectile_count: 0},
             // {id: WEAPON.MOON_PULSE, level: 1, modifier: [], timer: 0, projectile_count: 0},
             // {id: WEAPON.ROMAN_CANDLE, level: 1, modifier: [], timer: 0, projectile_count: 0},
+            {id: WEAPON.RAYGUN, level: 1, modifier: [], timer: 0, projectile_count: 0},
         ],
         
         entity_passive_slots: [

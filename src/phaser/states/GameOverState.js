@@ -7,8 +7,13 @@ export default class GameOverState extends State {
         this.game = game;
     }
 
-    onEnter() {}
+    onEnter() {
+        this.game.audio.playMusic(SOUND.PAUSE);
+    }
     onUpdate(dt, seconds){}
-    onExit(){}
+    onExit(){
+        this.game.audio.pauseMusic();
+        this.game.audio.playMusic(SOUND.SPACE);
+    }
 
 }

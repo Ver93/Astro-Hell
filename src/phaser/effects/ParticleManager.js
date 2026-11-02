@@ -68,13 +68,20 @@ export default class ParticleManager {
         }
     }
 
-    clear() {
+    reset() {
         for (const effect of this.effects.values()) {
-            if (effect.clear) {
+            if (effect?.reset) {
+                effect.reset();
+            } else if (effect?.stop) {
+                effect.stop();
+            } else if (effect?.clear) {
                 effect.clear();
             }
         }
+    }
 
+    clear() {
+        this.reset();
         this.effects.clear();
     }
 }

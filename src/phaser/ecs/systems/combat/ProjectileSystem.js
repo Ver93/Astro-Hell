@@ -10,6 +10,11 @@ export default class ProjectileSystem {
     }
 
     update(dt, seconds){
+        if(!this.player){
+            this.player = this.ecs.getEntity(this.game.context.player);
+            return;
+        }
+        
         this.behavior.update(this.player, this.ecs, dt, seconds);
     }
 }

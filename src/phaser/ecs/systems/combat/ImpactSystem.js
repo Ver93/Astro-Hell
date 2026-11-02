@@ -21,6 +21,20 @@ export default class ImpactSystem {
         this.damageStackDuration = 250;
     }
 
+    reset() {
+        for (const stack of this.damageStacks.values()) {
+            if (stack.tween) {
+                stack.tween.stop();
+            }
+
+            if (stack.text) {
+                this.damageTextPool.release(stack.text);
+            }
+        }
+
+        this.damageStacks.clear();
+    }
+
     update(dt, seconds) {
         const collisionSystem = this.game.systems.collisionSystem;
 

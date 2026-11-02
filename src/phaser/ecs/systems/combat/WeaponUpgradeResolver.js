@@ -1,3 +1,4 @@
+
 import WeaponDefinitions from "../../../data/weapon/WeaponDefinitions";
 import UpgradeDefinitions from "../../../../shared/data/upgrade/UpgradeDefinitions";
 
@@ -5,19 +6,15 @@ export default class WeaponUpgradeResolver {
 
     resolve(weapon) {
 
-        const def =
-            WeaponDefinitions[weapon.id];
+        const def = WeaponDefinitions[weapon.id];
 
         if (!def) return null;
-
 
         const upg =
             UpgradeDefinitions[weapon.id]
                 ?.levels?.[weapon.level] ?? {};
 
-
         return {
-
             ...def,
 
             projectile_max_count:

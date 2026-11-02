@@ -13,6 +13,9 @@ const SOUND = {
     POP:        10011,
     PICKUP:     10012,
     DYNAMITE:   10013,
+    SCORE:      10014,
+    BOOST:      10015,
+    RAY:        10016
 };
 
 export default SOUND;

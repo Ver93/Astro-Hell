@@ -24,21 +24,26 @@ export default class BoundarySystem {
             if (!alive[id]) continue;
 
             const e = entities[id];
-            if (!e) continue;
+            if (!e || !e.entity_active) continue;
 
-            if (!e.entity_active) continue;
-
-            if (
+            const outside =
                 e.entity_position_x < left - offset ||
                 e.entity_position_x > right + offset ||
                 e.entity_position_y < top - offset ||
-                e.entity_position_y > bottom + offset
+                e.entity_position_y > bottom + offset;
+
+            if (e.entity_category === ENTITY_CATEGORY.PROJECTILE) {
+                if (outside) {
+                    e.entity_collider_enabled = false;
+                    e.entity_state = ENTITY_STATE.DEAD;
+                }
+            }
+
+            if (
+                e.entity_category === ENTITY_CATEGORY.ENEMY ||
+                e.entity_category === ENTITY_CATEGORY.ITEM
             ) {
-                // e.entity_state = ENTITY_STATE.DEAD;
-                // if(e.entity_category === ENTITY_CATEGORY.ENEMY){
-                //     // console.log(e.entity_state);
-                //     return;
-                // }
+                e.entity_collider_enabled = !outside;
             }
         }
     }

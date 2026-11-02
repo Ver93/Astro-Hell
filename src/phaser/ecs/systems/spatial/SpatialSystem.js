@@ -12,6 +12,12 @@ export default class SpatialSystem {
         this.queryStamp = 0;
     }
 
+    reset() {
+        this.grid.clear();
+        this.candidateStamp.fill(0);
+        this.queryStamp = 0;
+    }
+
     update() {
         this.grid.clear();
 

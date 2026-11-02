@@ -35,4 +35,24 @@ export default class SpriteSystem {
             }
         }
     }
+
+    reset() {
+
+        const entities = this.ecs.entities;
+        const alive = this.ecs.alive;
+
+        for (let id = 1; id < this.ecs.nextId; id++) {
+
+            const entity = entities[id];
+
+            if (!entity) continue;
+
+            const sprite = entity.entity_sprite_object;
+
+            if (sprite) {
+                sprite.destroy();
+                entity.entity_sprite_object = null;
+            }
+        }
+    }
 }

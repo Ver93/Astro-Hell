@@ -47,6 +47,19 @@ export default class WorldSpawnerSystem {
         this.spawnDistance = 100;
     }
 
+    reset() {
+        this.spawnTimer = 0;
+        this.activeEnemyCount = 0;
+
+        this.separationX.fill(0);
+        this.separationY.fill(0);
+
+        this.waveSystem.reset?.();
+        this.scalingSystem.reset?.();
+
+        this.spatial = null;
+    }
+
     update(dt, seconds) {
         if (!this.spatial) {
             this.spatial =
@@ -97,9 +110,6 @@ export default class WorldSpawnerSystem {
             return;
         }
 
-        /*
-         * Global population limit.
-         */
         if (
             this.activeEnemyCount >=
             this.maxActiveEnemies
@@ -107,10 +117,6 @@ export default class WorldSpawnerSystem {
             return;
         }
 
-        /*
-         * Scaling determines
-         * how many this wave should have.
-         */
         const time =
             this.waveSystem.getTime();
 
@@ -120,15 +126,6 @@ export default class WorldSpawnerSystem {
                 time
             );
 
-        /*
-         * If this wave's target population
-         * is already reached, stop spawning
-         * until the next wave.
-         *
-         * We use the actual active enemy count
-         * here, so enemies from previous waves
-         * also contribute to the population.
-         */
         if (
             this.activeEnemyCount >=
             targetEnemyCount
@@ -144,46 +141,32 @@ export default class WorldSpawnerSystem {
 
         this.spawnTimer -= seconds;
 
-        if (this.spawnTimer > 0) {
-            return;
-        }
+        let spawned = 0;
 
-        /*
-         * Spawn several per update when needed.
-         * This allows the population to ramp up
-         * quickly without a huge loop.
-         */
-        const spawnAmount = 10;
+        const maxSpawnPerUpdate = 2;
 
-        for (
-            let i = 0;
-            i < spawnAmount;
-            i++
+        while (
+            this.spawnTimer <= 0 &&
+            spawned < maxSpawnPerUpdate
         ) {
             if (
-                this.activeEnemyCount >=
-                targetEnemyCount
+                this.activeEnemyCount >= targetEnemyCount ||
+                this.activeEnemyCount >= this.maxActiveEnemies
             ) {
                 break;
             }
 
-            if (
-                this.activeEnemyCount >=
-                this.maxActiveEnemies
-            ) {
-                break;
-            }
-
-            const spawned =
+            const success =
                 this.spawnWaveEnemy(wave);
 
-            if (!spawned) {
+            if (!success) {
+                this.spawnTimer = 0;
                 break;
             }
-        }
 
-        this.spawnTimer =
-            spawnInterval;
+            this.spawnTimer += spawnInterval;
+            spawned++;
+        }
     }
 
     spawnWaveEnemy(wave) {

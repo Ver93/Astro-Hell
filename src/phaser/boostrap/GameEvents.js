@@ -16,6 +16,11 @@ export default class GameEvents {
             this.game.resumeGame();
         }, this);
 
+        this.events.on("newGame", () => {
+            this.game.resetGame();
+            console.log("New game started");
+        }, this);
+
         this.events.on("selectUpgrade", (upgrade) => {
             this.game.upgrade.apply(upgrade);
             this.game.resumeGame();

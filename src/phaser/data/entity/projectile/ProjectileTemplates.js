@@ -107,6 +107,28 @@ const ProjectileTemplates = {
         entity_projectile_lifetime: 2000
     },
 
+    [ENTITY_TYPE.PROJECTILE_RAY]: {
+        entity_category:            ENTITY_CATEGORY.PROJECTILE,
+        entity_type:                ENTITY_TYPE.PROJECTILE_RAY,
+        entity_stats_speed:         30,
+        entity_rotation_mode:       ROTATION_MODE.VELOCITY,
+        entity_rotation_speed:      0.1,
+        entity_behavior_pattern:    "none",
+        entity_sprite_texture:      TEXTURE.PROJECTILE_RAY,
+        entity_sprite_depth:        99,
+        entity_width:               8,
+        entity_height:              8,
+        entity_scale:               2,
+        entity_collider_enabled:    true,
+        entity_collider_mask:       ENTITY_CATEGORY.ENEMY,
+        entity_collider_width:      16,
+        entity_collider_height:     16,
+        entity_collider_offset_x:   0,
+        entity_collider_offset_y:   0,
+        entity_trailEffect:         null,
+        entity_projectile_lifetime: 2000
+    },
+
     [ENTITY_TYPE.PROJECTILE_RUBBER_DUCK]: {
         entity_category:            ENTITY_CATEGORY.PROJECTILE,
         entity_type:                ENTITY_TYPE.PROJECTILE_RUBBER_DUCK,

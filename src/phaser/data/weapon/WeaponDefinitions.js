@@ -12,6 +12,13 @@ const WeaponDefinitions = {
         projectile_type: ENTITY_TYPE.PROJECTILE_BANANARANG
     },
 
+    [WEAPON.REVOLVER]: {
+        weapon_cooldown: 1,
+        projectile_spawn_interval: 1,
+        projectiles_per_shot: 3,
+        projectile_max_count: 3,
+        projectile_type: ENTITY_TYPE.PROJECTILE_BULLET
+    },
 
     [WEAPON.FLOPPY_SHIELD]: {
         weapon_cooldown: 1,
@@ -22,7 +29,6 @@ const WeaponDefinitions = {
         projectile_type: ENTITY_TYPE.PROJECTILE_FLOPPY
     },
 
-
     [WEAPON.REVOLVER]: {
         weapon_cooldown: 1,
         projectile_spawn_interval: 1,
@@ -31,6 +37,13 @@ const WeaponDefinitions = {
         projectile_type: ENTITY_TYPE.PROJECTILE_BULLET
     },
 
+    [WEAPON.RAYGUN]: {
+        weapon_cooldown: 0.1,
+        projectile_spawn_interval: 1,
+        projectiles_per_shot: 1,
+        projectile_max_count: 1,
+        projectile_type: ENTITY_TYPE.PROJECTILE_RAY
+    },
 
     [WEAPON.RUBBER_DUCKY]: {
         weapon_cooldown: 1,

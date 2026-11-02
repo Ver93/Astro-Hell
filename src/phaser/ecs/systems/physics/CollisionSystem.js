@@ -14,7 +14,6 @@ export default class CollisionSystem {
         this.collisionY = new Float32Array(this.ecs.max);
         this.collisionCount = 0;
 
-        // Enemy <> Enemy overlaps
         this.overlapA = new Uint32Array(this.ecs.max);
         this.overlapB = new Uint32Array(this.ecs.max);
         this.overlapCount = 0;
@@ -29,6 +28,22 @@ export default class CollisionSystem {
             this.debugGraphics = this.scene.add.graphics();
             this.debugGraphics.setDepth(999999);
             this.debugGraphics.setScrollFactor(1);
+        }
+    }
+
+    reset() {
+        this.collisionCount = 0;
+        this.overlapCount = 0;
+
+        this.colliders.length = 0;
+
+        this.previousCollisions.clear();
+        this.activeCollisions.clear();
+
+        this.spatial = null;
+
+        if (this.debugGraphics) {
+            this.debugGraphics.clear();
         }
     }
 

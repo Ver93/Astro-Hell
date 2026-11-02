@@ -28,6 +28,8 @@ export default class DropSystem {
                     exp.entity_position_x = e.entity_position_x;
                     exp.entity_position_y = e.entity_position_y;
 
+                    console.log(player.entity_passive_luck);
+
                     if (Math.random() < 0.0001 * player.entity_passive_luck){
                         const crystal = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_CRYSTAL);
                         crystal.entity_position_x = e.entity_position_x;

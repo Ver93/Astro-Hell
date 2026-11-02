@@ -1,3 +1,4 @@
+
 import WeaponSpawner from "./WeaponSpawner";
 import WeaponTargeting from "./WeaponTargeting";
 import WeaponUpgradeResolver from "./WeaponUpgradeResolver";
@@ -8,16 +9,12 @@ export default class WeaponSystem {
         this.game = game;
         this.ecs = game.ecs;
 
-        this.playerID = game.context.player;
         this.entityManager = game.entity;
 
         this.spatial = null;
 
-        this.playerEntity =
-            this.ecs.getEntity(this.playerID);
-
-        this.playerWeapons =
-            this.playerEntity?.entity_weapon_slots;
+        this.playerEntity = null;
+        this.playerWeapons = [];
 
         this.upgradeResolver =
             new WeaponUpgradeResolver();
@@ -32,30 +29,37 @@ export default class WeaponSystem {
             );
     }
 
-
     update(dt, seconds) {
 
+        // Hämta alltid aktuell spelare
+        const playerId = this.game.context.player;
+
+        this.playerEntity = playerId != null
+            ? this.ecs.getEntity(playerId)
+            : null;
+
+        if (!this.playerEntity) {
+            this.playerWeapons = [];
+            return;
+        }
+
+        this.playerWeapons =
+            this.playerEntity.entity_weapon_slots || [];
+
+        // Hämta spatial system
         if (!this.spatial) {
             this.spatial =
                 this.game.systems.spatialSystem;
 
-            this.targeting.setSpatial(
-                this.spatial
-            );
-
-            return;
+            this.targeting.setSpatial(this.spatial);
         }
 
-        if (!this.playerEntity) return;
-        if (!this.playerWeapons) return;
-
+        if (!this.spatial) return;
 
         for (const weapon of this.playerWeapons) {
 
             const config =
-                this.upgradeResolver.resolve(
-                    weapon
-                );
+                this.upgradeResolver.resolve(weapon);
 
             this.spawner.update(
                 weapon,
