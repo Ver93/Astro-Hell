@@ -153,7 +153,7 @@ export default class GameContext {
 
     getHUDData() {
 
-        this.requiredExp = (this.player_level * 20) / 0.4;
+        this.requiredExp = (this.player_level * 2) / 0.4;
 
         return {
             level: this.player_level,

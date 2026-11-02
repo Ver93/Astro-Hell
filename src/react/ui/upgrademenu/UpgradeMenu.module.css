@@ -1,11 +1,13 @@
+
+/* =========================================
+   MENU
+========================================= */
+
 .menu {
     position: relative;
-
     width: 100%;
     height: 100%;
-
     overflow: hidden;
-
     user-select: none;
 
     background:
@@ -19,9 +21,13 @@
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 
-    box-shadow:
-        inset 0 0 120px rgba(0, 0, 0, 0.55);
+    box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.55);
 }
+
+
+/* =========================================
+   UPGRADE LIST
+========================================= */
 
 .upgradeList {
     position: absolute;
@@ -31,46 +37,55 @@
 
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    align-items: center;
+
+    gap: clamp(8px, 2vh, 16px);
+
+    width: min(92vw, 420px);
+    max-height: 90%;
+    overflow-y: auto;
 
     z-index: 10;
 }
 
 .upgradeCard {
-    width: 360px;
-    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
 
-    background: rgba(0,0,0,1);
-    border: 3px solid #ffffff;
+    padding: clamp(10px, 2vw, 16px);
+
+    background: #000;
+    border: 3px solid #fff;
     border-radius: 4px;
 
     color: #fff;
     font-family: "Press Start 2P", monospace;
-
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .upgradeCard h2 {
     margin: 0;
-    font-size: 18px;
+    font-size: clamp(11px, 1.5vw, 18px);
+    line-height: 1.5;
 }
 
 .upgradeCard p {
     margin-top: 8px;
-    font-size: 12px;
+    font-size: clamp(8px, 1vw, 12px);
+    line-height: 1.6;
     opacity: 0.9;
 }
 
 .icon {
-    font-size: 32px;
+    font-size: clamp(22px, 3vw, 32px);
     margin-bottom: 10px;
 }
 
 
-/* =========================
-   KISTOR
-   ========================= */
+/* =========================================
+   TREASURE CHESTS
+========================================= */
 
 .treasureContainer {
     position: absolute;
@@ -80,14 +95,12 @@
 
     overflow: visible;
 
-    transform: scale(5);
+    transform: scale(clamp(2, 0.4vw + 2, 5));
     transform-origin: center;
 
     image-rendering: pixelated;
 }
 
-
-/* Själva kistan klipper spritesheeten */
 .treasure {
     position: absolute;
 
@@ -100,12 +113,9 @@
     transform-origin: center;
 
     image-rendering: pixelated;
-
     cursor: pointer;
 }
 
-
-/* Spritesheet */
 .treasure img {
     position: absolute;
 
@@ -118,14 +128,13 @@
     max-width: none;
 
     image-rendering: pixelated;
-
     pointer-events: auto;
 }
 
 
-/* =========================
+/* =========================================
    FLY IN
-   ========================= */
+========================================= */
 
 .treasure1 {
     top: 50%;
@@ -146,35 +155,19 @@
 }
 
 @keyframes treasureFlyIn1 {
-    from {
-        left: -30vw;
-    }
-
-    to {
-        left: 25%;
-    }
+    from { left: -30vw; }
+    to { left: 25%; }
 }
 
 @keyframes treasureFlyIn2 {
-    from {
-        left: -30vw;
-    }
-
-    to {
-        left: 50%;
-    }
+    from { left: -30vw; }
+    to { left: 50%; }
 }
 
 @keyframes treasureFlyIn3 {
-    from {
-        left: -30vw;
-    }
-
-    to {
-        left: 75%;
-    }
+    from { left: -30vw; }
+    to { left: 75%; }
 }
-
 
 .treasure.idle:hover img {
     animation: treasureHover 700ms steps(6) infinite;
@@ -188,30 +181,27 @@
     left: -912px;
 }
 
-.chest_bottom {
-    width: 48px !important;
-    height: 48px !important;
-
-    left: 0 !important;
-    top: 0;
-
-    z-index: 3;
-}
-
+.chest_bottom,
 .chest_top {
     width: 48px !important;
     height: 48px !important;
 
     left: 0 !important;
     top: 0;
+}
 
+.chest_bottom {
+    z-index: 3;
+}
+
+.chest_top {
     z-index: 1;
 }
 
 
-/* =========================
-   YELLOW BANNER
-   ========================= */
+/* =========================================
+   BANNER
+========================================= */
 
 .yellowBanner {
     position: absolute;
@@ -225,9 +215,7 @@
     background: rgba(255, 255, 0, 0.473);
 
     image-rendering: pixelated;
-
     pointer-events: none;
-
     z-index: 2;
 
     transform-origin: bottom center;
@@ -236,87 +224,39 @@
 }
 
 @keyframes bannerShootOut {
-    from {
-        transform: scaleY(0);
-    }
-
-    to {
-        transform: scaleY(1);
-    }
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
 }
 
 
-/* =========================
-   HOVER ANIMATION
-   ========================= */
+/* =========================================
+   TREASURE ANIMATIONS
+========================================= */
 
 @keyframes treasureHover {
-
-    from {
-        left: 0;
-    }
-
-    to {
-        left: -288px;
-    }
-
+    from { left: 0; }
+    to { left: -288px; }
 }
-
-
-/* =========================
-   OPEN ANIMATION
-   ========================= */
 
 @keyframes treasureOpen {
-
-    from {
-        left: 0;
-    }
-
-    to {
-        left: -912px;
-    }
-
+    from { left: 0; }
+    to { left: -912px; }
 }
-
-
-/* =========================
-   FLY IN LEFT
-   ========================= */
 
 @keyframes treasureFlyInLeft {
-
-    from {
-        left: -300px;
-    }
-
-    to {
-        left: 20%;
-    }
-
+    from { left: -300px; }
+    to { left: 20%; }
 }
-
-
-/* =========================
-   FLY IN RIGHT
-   ========================= */
 
 @keyframes treasureFlyInRight {
-
-    from {
-        right: -300px;
-    }
-
-    to {
-        right: 20%;
-    }
-
+    from { right: -300px; }
+    to { right: 20%; }
 }
 
 
-/* =========================
-   CLICK SPLASH
-   ========================= */
+/* =========================================
+   SPLASH
+========================================= */
 
 .splash {
     position: absolute;
@@ -328,14 +268,8 @@
     top: 0;
 
     pointer-events: none;
-
     z-index: 10;
 }
-
-
-/* =========================
-   PARTICLES
-   ========================= */
 
 .splash span {
     position: absolute;
@@ -350,98 +284,43 @@
 
     image-rendering: pixelated;
 
-    box-shadow:
-        0 0 0 2px rgba(255, 255, 0, 0.35);
+    box-shadow: 0 0 0 2px rgba(255, 255, 0, 0.35);
 
-    animation:
-        splashParticle 450ms steps(5) forwards;
+    animation: splashParticle 450ms steps(5) forwards;
 }
 
-
-/* =========================
-   PARTICLE DIRECTIONS
-   ========================= */
-
-.splash1 {
-    --x: -38px;
-    --y: -30px;
-}
-
-.splash2 {
-    --x: 0px;
-    --y: -48px;
-}
-
-.splash3 {
-    --x: 38px;
-    --y: -30px;
-}
-
-.splash4 {
-    --x: 48px;
-    --y: 0px;
-}
-
-.splash5 {
-    --x: 38px;
-    --y: 30px;
-}
-
-.splash6 {
-    --x: 0px;
-    --y: 48px;
-}
-
-.splash7 {
-    --x: -38px;
-    --y: 30px;
-}
-
-.splash8 {
-    --x: -48px;
-    --y: 0px;
-}
-
-
-/* =========================
-   SPLASH ANIMATION
-   ========================= */
+.splash1 { --x: -38px; --y: -30px; }
+.splash2 { --x: 0px; --y: -48px; }
+.splash3 { --x: 38px; --y: -30px; }
+.splash4 { --x: 48px; --y: 0px; }
+.splash5 { --x: 38px; --y: 30px; }
+.splash6 { --x: 0px; --y: 48px; }
+.splash7 { --x: -38px; --y: 30px; }
+.splash8 { --x: -48px; --y: 0px; }
 
 @keyframes splashParticle {
-
     0% {
-        transform:
-            translate(0, 0)
-            scale(1.4);
-
+        transform: translate(0, 0) scale(1.4);
         opacity: 1;
     }
 
     35% {
         transform:
-            translate(
-                calc(var(--x) * 0.45),
-                calc(var(--y) * 0.45)
-            )
+            translate(calc(var(--x) * 0.45), calc(var(--y) * 0.45))
             scale(1);
-
         opacity: 1;
     }
 
     100% {
-        transform:
-            translate(var(--x), var(--y))
-            scale(0);
-
+        transform: translate(var(--x), var(--y)) scale(0);
         opacity: 0;
     }
-
 }
 
 
-/* =========================
+/* =========================================
    ITEMS
-   ========================= */
+========================================= */
 
 .itemStream {
     position: absolute;
@@ -453,14 +332,11 @@
     top: -79px;
 
     overflow: hidden;
-
     pointer-events: none;
-
     z-index: 4;
 
     image-rendering: pixelated;
 }
-
 
 .itemTrack {
     display: flex;
@@ -471,7 +347,6 @@
     animation: itemScroll 1s linear infinite;
 }
 
-
 .itemFrame {
     width: 32px;
     height: 32px;
@@ -480,21 +355,308 @@
 
     background-image: url("/assets/images/items_row.png");
     background-repeat: no-repeat;
-
     background-size: 480px 32px;
 
     image-rendering: pixelated;
 }
 
-
 @keyframes itemScroll {
+    from { transform: translateY(0); }
+    to { transform: translateY(-480px); }
+}
 
-    from {
-        transform: translateY(0);
+
+/* =========================================
+   SCREEN
+========================================= */
+
+.screen {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: clamp(10px, 3vw, 40px);
+    box-sizing: border-box;
+}
+
+.frame {
+    width: min(100%, 1000px);
+    max-height: 90%;
+    overflow-y: auto;
+
+    padding: clamp(14px, 3vw, 36px);
+
+    box-sizing: border-box;
+
+    border: clamp(3px, 0.5vw, 6px) solid #fff;
+
+    background: #111118;
+
+    box-shadow:
+        12px 12px 0 #000,
+        inset 0 0 0 4px #444450;
+}
+
+.title {
+    position: relative;
+    z-index: 5;
+
+    margin-bottom: clamp(12px, 2.5vw, 30px);
+
+    font-size: clamp(20px, 5vw, 48px);
+    font-weight: 900;
+    letter-spacing: clamp(1px, 0.5vw, 3px);
+
+    color: #fff;
+    text-align: center;
+
+    text-shadow: 4px 4px 0 #000;
+}
+
+.upgrades {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: clamp(4px, 2vw, 24px);
+    width: 100%;
+    min-width: 0;
+}
+
+/* =========================================
+   INTRO
+========================================= */
+
+.intro {
+    position: absolute;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+    pointer-events: none;
+}
+
+
+/* =========================================
+   FLASH
+========================================= */
+
+.flash {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: clamp(90px, 15vw, 180px);
+    height: clamp(90px, 15vw, 180px);
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(0, 255, 255, 0.65) 30%,
+        rgba(0, 180, 255, 0.2) 55%,
+        transparent 75%
+    );
+
+    transform: translate(-50%, -50%);
+    animation: flashImpact 0.35s ease-out forwards;
+}
+
+@keyframes flashImpact {
+    0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 1;
     }
 
-    to {
-        transform: translateY(-480px);
+    100% {
+        transform: translate(-50%, -50%) scale(5);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+   IMPACT
+========================================= */
+
+.impact {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: 40px;
+    height: 40px;
+
+    transform: translate(-50%, -50%);
+}
+
+.core {
+    position: absolute;
+    inset: 0;
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        white 0%,
+        rgba(100, 240, 255, 0.9) 30%,
+        rgba(0, 180, 255, 0.4) 55%,
+        transparent 75%
+    );
+
+    animation: coreBlast 0.55s ease-out forwards;
+}
+
+.wave,
+.wave2 {
+    position: absolute;
+    inset: -30px;
+
+    border-radius: 50%;
+    border: none;
+
+    background: radial-gradient(
+        circle,
+        transparent 65%,
+        rgba(0, 255, 255, 0.95) 67%,
+        rgba(0, 255, 255, 0.5) 70%,
+        transparent 74%
+    );
+
+    animation: waveExpand 0.8s ease-out forwards;
+    pointer-events: none;
+}
+
+.wave2 {
+    inset: -40px;
+
+    background: radial-gradient(
+        circle,
+        transparent 65%,
+        rgba(255, 255, 255, 0.95) 67%,
+        rgba(0, 200, 255, 0.5) 70%,
+        transparent 74%
+    );
+
+    animation-delay: 0.1s;
+}
+
+@keyframes waveExpand {
+    0% {
+        transform: scale(0.2);
+        opacity: 1;
     }
 
+    100% {
+        transform: scale(12);
+        opacity: 0;
+    }
+}
+
+@keyframes coreBlast {
+    0% {
+        transform: scale(0.1);
+        opacity: 1;
+    }
+
+    30% {
+        transform: scale(8);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(20);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+    .upgradeList {
+        width: 90vw;
+        max-height: 85%;
+    }
+
+    .frame {
+        width: 100%;
+        padding: 14px;
+    }
+
+    .upgrades {
+        flex-wrap: nowrap;
+        gap: 6px;
+    }
+
+    .upgrades > * {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
+    .upgradeCard {
+        padding: 10px;
+    }
+
+    .treasureContainer {
+        transform: scale(2.5);
+    }
+}
+
+
+/* =========================================
+   MOBILE LANDSCAPE
+========================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .screen {
+        padding: 8px;
+    }
+
+    .frame {
+        max-height: 96%;
+        padding: 12px;
+    }
+
+    .title {
+        margin-bottom: 8px;
+        font-size: clamp(18px, 5vh, 32px);
+    }
+
+    .upgrades {
+        gap: 8px;
+    }
+
+    .upgradeList {
+        max-height: 95%;
+        gap: 6px;
+    }
+
+    .treasureContainer {
+        transform: scale(2);
+    }
+}
+
+
+/* =========================================
+   TOUCH DEVICES
+========================================= */
+
+@media (hover: none) {
+    .treasure.idle:hover img {
+        animation: none;
+    }
 }

@@ -1,23 +1,26 @@
+
 .screen {
     position: absolute;
-
     inset: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 40px;
+    padding: clamp(10px, 3vw, 40px);
+    box-sizing: border-box;
+
+    overflow-y: auto;
 }
 
-
 .frame {
-    width: 1000px;
-    max-width: 90vw;
+    width: min(100%, 1000px);
+    max-width: 100%;
 
-    padding: 36px;
+    padding: clamp(14px, 3vw, 36px);
+    box-sizing: border-box;
 
-    border: 6px solid #ffffff;
+    border: clamp(3px, 0.5vw, 6px) solid #ffffff;
 
     background: #111118;
 
@@ -27,26 +30,78 @@
 }
 
 .title {
-    margin-bottom: 30px;
+    margin: 0 0 clamp(14px, 2.5vw, 30px);
 
     text-align: center;
 
-    font-size: 28px;
+    font-size: clamp(18px, 2.8vw, 28px);
     font-weight: 900;
 
-    letter-spacing: 3px;
+    letter-spacing: clamp(1px, 0.3vw, 3px);
+    line-height: 1.5;
 
     color: #ffffff;
 
-    text-shadow:
-        4px 4px 0 #000000;
+    text-shadow: 4px 4px 0 #000000;
 }
 
 .upgrades {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
 
-    gap: 24px;
+    gap: clamp(4px, 1.5vw, 24px);
+
+    width: 100%;
+    min-width: 0;
+}
+
+/* MOBIL */
+@media (max-width: 600px) {
+    .screen {
+        padding: 12px;
+    }
+
+    .frame {
+        padding: 14px;
+    }
+
+    .title {
+        font-size: clamp(16px, 5vw, 22px);
+        margin-bottom: 16px;
+    }
+
+    .upgrades {
+        flex-wrap: nowrap;
+        gap: 6px;
+    }
+
+    .upgrades > * {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+}
+
+
+/* MOBIL I LANDSKAP */
+@media (max-height: 500px) and (orientation: landscape) {
+    .screen {
+        padding: 8px;
+    }
+
+    .frame {
+        padding: 12px;
+    }
+
+    .title {
+        font-size: clamp(16px, 4vh, 24px);
+        margin-bottom: 10px;
+    }
+
+    .upgrades {
+        gap: 8px;
+    }
 }
