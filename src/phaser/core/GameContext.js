@@ -54,7 +54,6 @@ export default class GameContext {
         player.entity_position_x = this.game.scene.scale.width / 2;
         player.entity_position_y = this.game.scene.scale.height / 2;
 
-        // Hitta spelarens entity-ID i ECS
         this.player = null;
 
         this.game.ecs.forEach((id, entity) => {
@@ -153,7 +152,7 @@ export default class GameContext {
 
     getHUDData() {
 
-        this.requiredExp = (this.player_level * 2) / 0.4;
+        this.requiredExp = (this.player_level * 10) / 0.4;
 
         return {
             level: this.player_level,

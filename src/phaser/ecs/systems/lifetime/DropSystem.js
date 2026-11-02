@@ -1,99 +1,110 @@
+
 import ENTITY_STATE from "../../../data/entity/EntityState";
 import ENTITY_CATEGORY from "../../../data/entity/EntityCategory";
 import ENTITY_TYPE from "../../../data/entity/EntityType";
 
 export default class DropSystem {
-    constructor(game){
+    constructor(game) {
         this.game = game;
         this.ecs = game.ecs;
         this.entityManager = game.managers.entity;
     }
 
-    update(dt, seconds){
+    update(dt, seconds) {
         const alive = this.ecs.alive;
         const entities = this.ecs.entities;
         const player = this.ecs.getEntity(this.game.context.player);
+
+        if (!player) return;
 
         for (let id = 1; id < this.ecs.nextId; id++) {
             if (!alive[id]) continue;
 
             const e = entities[id];
-            if (!e) continue;
+            if (!e || !e.entity_active) continue;
 
-            if (!e.entity_active) continue;
+            if (
+                e.entity_state !== ENTITY_STATE.DEAD ||
+                !e.entity_drop_loot ||
+                e.entity_loot_dropped
+            ) continue;
 
-            if(e.entity_state === ENTITY_STATE.DEAD && e.entity_drop_loot){
-                if(e.entity_state === ENTITY_STATE.DEAD && e.entity_drop_loot){
-                    const exp = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_EXPERIENCE);
-                    exp.entity_position_x = e.entity_position_x;
-                    exp.entity_position_y = e.entity_position_y;
+            // Markera direkt så fienden bara droppar en gång
+            e.entity_loot_dropped = true;
 
-                    console.log(player.entity_passive_luck);
+            const x = e.entity_position_x;
+            const y = e.entity_position_y;
+            const luck = player.entity_passive_luck || 0;
 
-                    if (Math.random() < 0.0001 * player.entity_passive_luck){
-                        const crystal = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_CRYSTAL);
-                        crystal.entity_position_x = e.entity_position_x;
-                        crystal.entity_position_y = e.entity_position_y;
-                        return;
-                    }
-                    
-                    if (Math.random() < 0.0001 * player.entity_passive_luck){
-                        const dynamite = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_DYNAMITE);
-                        dynamite.entity_position_x = e.entity_position_x;
-                        dynamite.entity_position_y = e.entity_position_y;
-                        return;
-                    }
+            // Alltid experience
+            const exp = this.entityManager.spawnEntity(
+                ENTITY_CATEGORY.ITEM,
+                ENTITY_TYPE.ITEM_EXPERIENCE
+            );
 
-                    if (Math.random() < 0.0001 * (1 + player.entity_passive_luck)){
-                        const dynamite = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_TREASURE);
-                        dynamite.entity_position_x = e.entity_position_x;
-                        dynamite.entity_position_y = e.entity_position_y;
-                        return;
-                    }
+            exp.entity_position_x = x;
+            exp.entity_position_y = y;
 
-                    if (Math.random() < 0.0001 * player.entity_passive_luck){
-                        const dynamite = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_CROWN);
-                        dynamite.entity_position_x = e.entity_position_x;
-                        dynamite.entity_position_y = e.entity_position_y;
-                        return;
-                    }
+            // console.log("EXP DROPPED:", e.entity_id);
 
-                    if (Math.random() < 0.001 * player.entity_passive_luck){
-                        const dynamite = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_COLLECTOR);
-                        dynamite.entity_position_x = e.entity_position_x;
-                        dynamite.entity_position_y = e.entity_position_y;
-                        return;
-                    }
+            // Crystal
+            if (Math.random() < 0.0001 * luck) {
+                this.spawnDrop(ENTITY_TYPE.ITEM_CRYSTAL, x, y);
+            }
 
-                    if (Math.random() < 0.001 * player.entity_passive_luck){
-                        const crystal = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_SAPPHIRE);
-                        crystal.entity_position_x = e.entity_position_x;
-                        crystal.entity_position_y = e.entity_position_y;
-                        return;
-                    }
+            // Dynamite
+            if (Math.random() < 0.0001 * luck) {
+                this.spawnDrop(ENTITY_TYPE.ITEM_DYNAMITE, x, y);
+            }
 
-                    if (Math.random() < 0.001 * player.entity_passive_luck){
-                        const crystal = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_RUBY);
-                        crystal.entity_position_x = e.entity_position_x;
-                        crystal.entity_position_y = e.entity_position_y;
-                        return;
-                    }
+            // Treasure
+            if (Math.random() < 0.0001 * (1 + luck)) {
+                this.spawnDrop(ENTITY_TYPE.ITEM_TREASURE, x, y);
+            }
 
-                    if (Math.random() < 0.001 * player.entity_passive_luck){
-                        const crystal = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_TOPAZ);
-                        crystal.entity_position_x = e.entity_position_x;
-                        crystal.entity_position_y = e.entity_position_y;
-                        return;
-                    }
+            // Crown
+            if (Math.random() < 0.0001 * luck) {
+                this.spawnDrop(ENTITY_TYPE.ITEM_CROWN, x, y);
+            }
 
-                    if (Math.random() < 0.001 * player.entity_passive_luck){
-                        const crystal = this.entityManager.spawnEntity(ENTITY_CATEGORY.ITEM, ENTITY_TYPE.ITEM_DIAMOND);
-                        crystal.entity_position_x = e.entity_position_x;
-                        crystal.entity_position_y = e.entity_position_y;
-                        return;
-                    }
-                }
+            // Collector
+            if (Math.random() < 0.001 * luck) {
+                this.spawnDrop(ENTITY_TYPE.ITEM_COLLECTOR, x, y);
+            }
+
+            // Sapphire
+            if (Math.random() < 0.001 * luck) {
+                this.spawnDrop(ENTITY_TYPE.ITEM_SAPPHIRE, x, y);
+            }
+
+            // Ruby
+            if (Math.random() < 0.001 * luck) {
+                this.spawnDrop(ENTITY_TYPE.ITEM_RUBY, x, y);
+            }
+
+            // Topaz
+            if (Math.random() < 0.001 * luck) {
+                this.spawnDrop(ENTITY_TYPE.ITEM_TOPAZ, x, y);
+            }
+
+            // Diamond
+            if (Math.random() < 0.001 * luck) {
+                this.spawnDrop(ENTITY_TYPE.ITEM_DIAMOND, x, y);
             }
         }
+    }
+
+    spawnDrop(type, x, y) {
+        const item = this.entityManager.spawnEntity(
+            ENTITY_CATEGORY.ITEM,
+            type
+        );
+
+        if (!item) return;
+
+        item.entity_position_x = x;
+        item.entity_position_y = y;
+
+        console.log("SPECIAL ITEM DROPPED:", type);
     }
 }

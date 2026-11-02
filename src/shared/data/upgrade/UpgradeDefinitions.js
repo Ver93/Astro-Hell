@@ -26,11 +26,11 @@ const UpgradeDefinitions = {
         description: "Fires a concentrated beam of energy that pierces through enemies.",
         texture: TEXTURE.WEAPON_RAYGUN,
         levels: {
-            1: { fire_interval: 900, cooldown: 1000 },
-            2: { fire_interval: 850, cooldown: 1000 },
-            3: { fire_interval: 750, cooldown: 1000 },
-            4: { fire_interval: 500, cooldown: 1000 },
-            5: { fire_interval: 250, cooldown: 1000 },
+            1: { fire_interval: 1000, cooldown: 1000 },
+            2: { fire_interval: 450, cooldown: 1000 },
+            3: { fire_interval: 350, cooldown: 1000 },
+            4: { fire_interval: 200, cooldown: 1000 },
+            5: { fire_interval: 100, cooldown: 100 },
         },
     },
 

@@ -176,6 +176,10 @@ export default class ImpactSystem {
             case ENTITY_TYPE.PROJECTILE_HONEY_JAR:
                 return;
 
+            case ENTITY_TYPE.PROJECTILE_RAY:
+                this.damage(target, dmg);
+                return;
+
             case ENTITY_TYPE.PROJECTILE_HONEY_POOL: {
                 const honey = target.entity_status_effects[STATUS_EFFECTS.HONEY];
                 if (honey) {

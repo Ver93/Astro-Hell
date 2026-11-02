@@ -12,13 +12,13 @@ export default function PauseMenu({ onResume, onMainMenu }) {
                         Resume
                     </MenuButton>
 
-                    <MenuButton onClick={onResume}>
+                    {/* <MenuButton onClick={onResume}>
                         Options
-                    </MenuButton>
-
+                    </MenuButton> */}
+{/* 
                     <MenuButton onClick={onMainMenu}>
                         End Run
-                    </MenuButton>
+                    </MenuButton> */}
                 </div>
             </div>
         </div>

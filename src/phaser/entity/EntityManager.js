@@ -1,10 +1,12 @@
+
 import PlayerTemplates from "../data/entity/player/PlayerTemplates.js";
 import EnemyTemplates from "../data/entity/enemy/EnemyTemplates.js";
 import ItemTemplates from "../data/entity/item/ItemTemplates.js";
 import ProjectileTemplates from "../data/entity/projectile/ProjectileTemplates.js";
-import WeaponDefinitions from "../data/weapon/WeaponDefinitions.js";
+
 import ENTITY_CATEGORY from "../data/entity/EntityCategory.js";
 import ENTITY_STATE from "../data/entity/EntityState.js";
+
 import EntityFactory from "./EntityFactory.js";
 
 export default class EntityManager {
@@ -41,51 +43,54 @@ export default class EntityManager {
 
     spawnEntity(category, entity_type) {
 
+        // Försök återanvända en inaktiv entity
         const ids = this.ecs.components[entity_type];
+
         if (ids) {
             for (const id of ids) {
-                
+
                 const entity = this.ecs.getEntity(id);
-                
-                if (!entity) {
-                    continue;
-                }
-                
-                if (entity.entity_active) {
-                    continue;
-                }
-                
+
+                if (!entity) continue;
+                if (entity.entity_active) continue;
+
                 entity.entity_active = true;
                 entity.entity_sprite_enabled = true;
                 entity.entity_collider_enabled = true;
+
+                // Återställ loot-status
+                entity.entity_loot_dropped = false;
+
+                // Återställ position
                 entity.entity_position_x = 0;
                 entity.entity_position_y = 0;
+
+                // Återställ hälsa och state
                 entity.entity_stats_health = entity.entity_stats_max_health;
                 entity.entity_state = ENTITY_STATE.IDLE;
-                
+
                 return entity;
             }
         }
 
+        // Skapa en ny entity om ingen inaktiv finns
         const factory = this.factories[category];
-        
+
         if (!factory) {
             console.log(
                 `[POOL] ERROR: No factory for category ${category}`
             );
             return null;
         }
-        
+
         const entity = factory.create(entity_type, {
             entity_type: entity_type
         });
-        
-        if (!entity) {
-            return null;
-        }
-        
+
+        if (!entity) return null;
+
         const id = this.ecs.createEntity(entity);
-        
+
         this.ecs.addComponent(id, entity.entity_type);
         this.ecs.addCategory(id, entity.entity_category);
 
@@ -93,10 +98,16 @@ export default class EntityManager {
         entity.entity_active = true;
         entity.entity_sprite_enabled = true;
         entity.entity_collider_enabled = true;
+
+        // Återställ loot-status
+        entity.entity_loot_dropped = false;
+
         entity.entity_position_x = 0;
         entity.entity_position_y = 0;
+
         entity.entity_stats_health = entity.entity_stats_max_health;
         entity.entity_state = ENTITY_STATE.IDLE;
+
         return entity;
     }
 
@@ -104,16 +115,12 @@ export default class EntityManager {
 
         if (!entity) return;
 
-        // console.log("DESPAWN", entity.entity_id);
-
+        // Stoppa aktiva status effects
         for (const type in entity.entity_status_effects) {
+
             const effect = entity.entity_status_effects[type];
 
-            // console.log("EFFECT", type, effect);
-            // console.log("VISUAL", effect.visual);
-
             if (effect.visual) {
-                // console.log("STOP HONEY/VISUAL");
                 effect.visual.stop();
                 effect.visual = null;
             }
