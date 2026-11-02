@@ -6,6 +6,7 @@ import HUD from "./hud/HUD.jsx";
 import PauseMenu from "./pausemenu/PauseMenu.jsx";
 import MainMenu from "./mainmenu/MainMenu.jsx";
 import GameOverScreen from "./gameovermenu/GameOverScreen.jsx";
+import TouchControls from "./components/TouchControls.jsx";
 
 const TREASURE_ASSETS = [
     `${import.meta.env.BASE_URL}assets/images/waiting_treasure_2.png`,
@@ -363,10 +364,14 @@ export default function GameUI({ gameRef }) {
             )}
 
             {showHUD && (
-                <HUD
-                    data={hudData}
-                    key={hudKey}
-                />
+                <>
+                    <HUD
+                        data={hudData}
+                        key={hudKey}
+                    />
+
+                    <TouchControls gameRef={gameRef} />
+                </>
             )}
 
             {showUpgradeMenu && (

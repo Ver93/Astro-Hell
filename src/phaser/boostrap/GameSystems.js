@@ -24,7 +24,8 @@ export default class GameSystems {
     constructor(game){
         this.game = game;
 
-        this.inputSystem        = new InputSystem(this.game);
+        this.inputSystem = new InputSystem(this.game);
+
         this.playerSystem       = new PlayerSystem(this.game);
         this.movementSystem     = new MovementSystem(this.game);
         this.rotationSystem     = new RotationSystem(this.game);

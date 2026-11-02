@@ -1,0 +1,72 @@
+
+.touch-controls {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.touch-joystick {
+    position: absolute;
+    left: 35px;
+    bottom: 35px;
+
+    width: 130px;
+    height: 130px;
+
+    border: 3px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: auto;
+    touch-action: none;
+}
+
+.touch-joystick-knob {
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.65);
+
+    pointer-events: none;
+}
+
+.touch-boost {
+    position: absolute;
+    right: 40px;
+    bottom: 45px;
+
+    width: 100px;
+    height: 100px;
+
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+
+    background: rgba(255, 100, 30, 0.65);
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    pointer-events: auto;
+    touch-action: none;
+}
+
+.touch-boost.active {
+    background: rgba(255, 180, 30, 0.95);
+    transform: scale(0.94);
+}
+
+@media (min-width: 1300px) {
+    .touch-controls {
+        display: none;
+    }
+}
