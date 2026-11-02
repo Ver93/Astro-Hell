@@ -25,13 +25,12 @@ export default function usePhaserGame(width, height) {
             },
 
             scale: {
-                mode: Phaser.Scale.RESIZE,
+                mode: Phaser.Scale.FIT,
                 autoCenter: Phaser.Scale.CENTER_BOTH,
                 width,
                 height,
             },
 
-            // Viktigt:
             disableVisibilityChange: true,
 
             scene: [MainScene],
