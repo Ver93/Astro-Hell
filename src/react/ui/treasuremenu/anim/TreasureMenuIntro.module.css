@@ -1,40 +1,106 @@
+/* =========================================
+   INTRO OVERLAY
+========================================= */
+
 .intro {
     position: absolute;
     inset: 0;
+
     display: flex;
     justify-content: center;
     align-items: center;
 
+    padding: clamp(16px, 4vw, 40px);
+    box-sizing: border-box;
+
     background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 
     z-index: 999;
 }
 
-.title {
-    font-size: 3rem;
-    font-weight: 900;
-    color: #ffd86b;
-    text-shadow: 0 0 20px rgba(255, 215, 100, 0.8),
-                 0 0 40px rgba(255, 215, 100, 0.4);
+/* =========================================
+   TITLE
+========================================= */
 
-    letter-spacing: 2px;
+.title {
+    max-width: 100%;
+    margin: 0;
+
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.15;
+
+    color: #ffd86b;
+
+    text-align: center;
+    overflow-wrap: break-word;
+
+    text-shadow:
+        0 0 20px rgba(255, 215, 100, 0.8),
+        0 0 40px rgba(255, 215, 100, 0.4);
+
+    letter-spacing: clamp(1px, 0.3vw, 2px);
     text-transform: uppercase;
 
     animation: pulse 1.4s ease-in-out infinite;
 }
+
+/* =========================================
+   PULSE ANIMATION
+========================================= */
 
 @keyframes pulse {
     0% {
         transform: scale(1);
         opacity: 1;
     }
+
     50% {
-        transform: scale(1.08);
+        transform: scale(1.05);
         opacity: 0.85;
     }
+
     100% {
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 400px) {
+    .title {
+        font-size: clamp(1.3rem, 7vw, 1.8rem);
+        text-shadow:
+            0 0 12px rgba(255, 215, 100, 0.8),
+            0 0 24px rgba(255, 215, 100, 0.4);
+    }
+}
+
+/* =========================================
+   LANDSCAPE PHONES
+========================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .intro {
+        padding: 12px 24px;
+    }
+
+    .title {
+        font-size: clamp(1.2rem, 5vh, 2rem);
+    }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .title {
+        animation: none;
     }
 }

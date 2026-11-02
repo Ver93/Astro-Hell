@@ -109,20 +109,20 @@ const UpgradeDefinitions = {
         },
     },
 
-    [WEAPON.MOON_PULSE]: {
-        id: WEAPON.MOON_PULSE,
-        type: "weapon",
-        name: "Moon Pulse",
-        description: "Creates a growing lunar aura around the player that pulses outward, damaging all enemies within its radius.",
-        texture: TEXTURE.WEAPON_MOON,
-        levels: {
-            1: { projectile_count: 1, projectiles_per_shot: 1, radius: 100, cooldown: 1900, damage: 10 },
-            2: { projectile_count: 1, projectiles_per_shot: 1, radius: 120, cooldown: 1800, damage: 12 },
-            3: { projectile_count: 1, projectiles_per_shot: 1, radius: 140, cooldown: 1500, damage: 14 },
-            4: { projectile_count: 1, projectiles_per_shot: 1, radius: 160, cooldown: 1250, damage: 16 },
-            5: { projectile_count: 1, projectiles_per_shot: 1, radius: 180, cooldown: 1000, damage: 20 },
-        },
-    },
+    // [WEAPON.MOON_PULSE]: {
+    //     id: WEAPON.MOON_PULSE,
+    //     type: "weapon",
+    //     name: "Moon Pulse",
+    //     description: "Creates a growing lunar aura around the player that pulses outward, damaging all enemies within its radius.",
+    //     texture: TEXTURE.WEAPON_MOON,
+    //     levels: {
+    //         1: { projectile_count: 1, projectiles_per_shot: 1, radius: 100, cooldown: 1900, damage: 10 },
+    //         2: { projectile_count: 1, projectiles_per_shot: 1, radius: 120, cooldown: 1800, damage: 12 },
+    //         3: { projectile_count: 1, projectiles_per_shot: 1, radius: 140, cooldown: 1500, damage: 14 },
+    //         4: { projectile_count: 1, projectiles_per_shot: 1, radius: 160, cooldown: 1250, damage: 16 },
+    //         5: { projectile_count: 1, projectiles_per_shot: 1, radius: 180, cooldown: 1000, damage: 20 },
+    //     },
+    // },
 
     [WEAPON.OLD_CHEESE]: {
         id: WEAPON.OLD_CHEESE,

@@ -1,3 +1,7 @@
+/* =========================================
+   TREASURE CONTAINER
+========================================= */
+
 .treasureContainer {
     position: absolute;
 
@@ -5,78 +9,60 @@
     height: 48px;
 
     left: -30vw;
+    top: 50%;
 
     overflow: visible;
 
-    transform: scale(5);
+    /* Desktop */
+    --chest-scale: 5;
+
+    transform: translate(-50%, -50%) scale(var(--chest-scale));
     transform-origin: center;
 
     image-rendering: pixelated;
-
     z-index: 300;
 }
 
-.treasure1 {
-    top: 50%;
+/* =========================================
+   TREASURE POSITIONS
+========================================= */
 
-    animation:
-        treasureFlyIn1
-        1s
-        ease-out
-        forwards;
+.treasure1 {
+    animation: treasureFlyIn1 1s ease-out forwards;
 }
 
 .treasure2 {
-    top: 50%;
-
-    animation:
-        treasureFlyIn2
-        1s
-        ease-out
-        200ms
-        forwards;
+    animation: treasureFlyIn2 1s ease-out 200ms forwards;
 }
 
 .treasure3 {
-    top: 50%;
-
-    animation:
-        treasureFlyIn3
-        1s
-        ease-out
-        400ms
-        forwards;
+    animation: treasureFlyIn3 1s ease-out 400ms forwards;
 }
 
-@keyframes treasureFlyIn1 {
-    from {
-        left: -30vw;
-    }
+/* =========================================
+   FLY IN ANIMATIONS
+   Only left is animated so responsive scaling
+   remains intact.
+========================================= */
 
-    to {
-        left: 25%;
-    }
+@keyframes treasureFlyIn1 {
+    from { left: -30vw; }
+    to   { left: 25%; }
 }
 
 @keyframes treasureFlyIn2 {
-    from {
-        left: -30vw;
-    }
-
-    to {
-        left: 50%;
-    }
+    from { left: -30vw; }
+    to   { left: 50%; }
 }
 
 @keyframes treasureFlyIn3 {
-    from {
-        left: -30vw;
-    }
-
-    to {
-        left: 75%;
-    }
+    from { left: -30vw; }
+    to   { left: 75%; }
 }
+
+/* =========================================
+   YELLOW BANNER
+========================================= */
 
 .yellowBanner {
     position: absolute;
@@ -90,18 +76,12 @@
     background: rgba(255, 255, 0, 0.473);
 
     image-rendering: pixelated;
-
     pointer-events: none;
 
     z-index: 2;
-
     transform-origin: bottom center;
 
-    animation:
-        bannerShootOut
-        200ms
-        ease-out
-        forwards;
+    animation: bannerShootOut 200ms ease-out forwards;
 }
 
 @keyframes bannerShootOut {
@@ -111,5 +91,35 @@
 
     to {
         transform: scaleY(1);
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+    .treasureContainer {
+        --chest-scale: 3;
+    }
+}
+
+/* =========================================
+   VERY SMALL PHONES
+========================================= */
+
+@media (max-width: 360px) {
+    .treasureContainer {
+        --chest-scale: 2;
+    }
+}
+
+/* =========================================
+   MOBILE LANDSCAPE
+========================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .treasureContainer {
+        --chest-scale: 2.5;
     }
 }

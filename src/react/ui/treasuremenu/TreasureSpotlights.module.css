@@ -1,85 +1,118 @@
+/* =========================================
+   SPOTLIGHTS
+========================================= */
 
 .spotlightLeft,
 .spotlightRight {
+    position: absolute;
 
-    position:absolute;
-    width:400px;
-    height:120%;
-    top:-10%;
-    z-index:3;
-    opacity:.5;
-    will-change:transform;
+    width: clamp(140px, 31vw, 400px);
+    height: 120%;
 
+    top: -10%;
+
+    z-index: 3;
+    opacity: 0.5;
+
+    will-change: transform;
+    pointer-events: none;
 }
 
+/* LEFT */
 
 .spotlightLeft {
+    left: clamp(-200px, -15vw, -70px);
 
-    left:-200px;
-
-    background:
-    linear-gradient(
+    background: linear-gradient(
         90deg,
         transparent,
-        rgba(0,255,255,.35),
+        rgba(0, 255, 255, 0.35),
         transparent
     );
 
-    animation:
-        spotlightLeftAnim 2.5s infinite alternate ease-in-out;
-
+    animation: spotlightLeftAnim 2.5s infinite alternate ease-in-out;
 }
 
-
+/* RIGHT */
 
 .spotlightRight {
+    right: clamp(-200px, -15vw, -70px);
 
-    right:-200px;
-
-    background:
-    linear-gradient(
+    background: linear-gradient(
         90deg,
         transparent,
-        rgba(255,0,180,.35),
+        rgba(255, 0, 180, 0.35),
         transparent
     );
 
-    animation:
-        spotlightRightAnim 2.5s infinite alternate ease-in-out;
-
+    animation: spotlightRightAnim 2.5s infinite alternate ease-in-out;
 }
 
-
+/* =========================================
+   ANIMATIONS
+========================================= */
 
 @keyframes spotlightLeftAnim {
-
     from {
-        transform:
-            translateX(0)
-            rotate(20deg);
+        transform: translateX(0) rotate(20deg);
     }
 
     to {
-        transform:
-            translateX(250px)
-            rotate(20deg);
+        transform: translateX(clamp(70px, 19vw, 250px)) rotate(20deg);
     }
-
 }
 
-
 @keyframes spotlightRightAnim {
-
     from {
-        transform:
-            translateX(0)
-            rotate(-20deg);
+        transform: translateX(0) rotate(-20deg);
     }
 
     to {
-        transform:
-            translateX(-250px)
-            rotate(-20deg);
+        transform: translateX(clamp(-250px, -19vw, -70px)) rotate(-20deg);
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+    .spotlightLeft,
+    .spotlightRight {
+        width: 45vw;
+        opacity: 0.4;
     }
 
+    .spotlightLeft {
+        left: -20vw;
+    }
+
+    .spotlightRight {
+        right: -20vw;
+    }
+}
+
+/* =========================================
+   MOBILE LANDSCAPE
+========================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .spotlightLeft,
+    .spotlightRight {
+        width: 30vw;
+        height: 140%;
+        top: -20%;
+        opacity: 0.35;
+    }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .spotlightLeft,
+    .spotlightRight {
+        animation: none;
+    }
 }
