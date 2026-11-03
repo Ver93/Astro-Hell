@@ -12,10 +12,6 @@
     pointer-events: none;
 }
 
-/* =========================
-   FLASH
-========================= */
-
 .flash {
     position: absolute;
     left: 50%;
@@ -49,10 +45,6 @@
         opacity: 0;
     }
 }
-
-/* =========================
-   IMPACT
-========================= */
 
 .impact {
     position: absolute;
@@ -145,10 +137,6 @@
         opacity: 0;
     }
 }
-
-/* =========================
-   TITLE
-========================= */
 
 .title {
     position: relative;

@@ -32,13 +32,11 @@ export default class UpgradeManager {
                 w => w.id === upgrade.id
             );
 
-            // Uppgradera befintligt vapen
             if (weapon) {
                 weapon.level = upgrade.level;
                 return;
             }
 
-            // Lägg till nytt vapen
             player.entity_weapon_slots.push({
                 id: upgrade.id,
                 level: 1,

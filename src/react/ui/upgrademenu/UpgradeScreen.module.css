@@ -59,7 +59,6 @@
     min-width: 0;
 }
 
-/* MOBIL */
 @media (max-width: 600px) {
     .screen {
         padding: 12px;
@@ -85,8 +84,6 @@
     }
 }
 
-
-/* MOBIL I LANDSKAP */
 @media (max-height: 500px) and (orientation: landscape) {
     .screen {
         padding: 8px;

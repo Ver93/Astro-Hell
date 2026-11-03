@@ -45,7 +45,6 @@ export default class FireworkExplosionEffect {
 
         emitter.explode(config.particles);
 
-        // Destroy emitter after effect finishes
         this.scene.time.delayedCall(1500, () => {
             emitter?.destroy();
         });

@@ -192,10 +192,7 @@ export default class GameContext {
         this.world = null;
         this.level = null;
 
-        // Skapa en ny spelare
         this.createPlayer();
-
-        // Uppdatera HUD efter reset
         this.updateHUD();
     }
 }

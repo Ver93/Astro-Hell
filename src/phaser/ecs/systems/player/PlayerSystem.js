@@ -233,7 +233,6 @@ export default class PlayerSystem {
 
         this.healthbar.clear();
 
-        // Health background
         this.healthbar.fillStyle(0x222222, 1);
         this.healthbar.fillRect(
             x,
@@ -242,7 +241,6 @@ export default class PlayerSystem {
             height
         );
 
-        // Health foreground
         let healthColor = 0x44dd55;
 
         if (healthPercent <= 0.5) {
@@ -261,7 +259,6 @@ export default class PlayerSystem {
             height
         );
 
-        // Boost background
         const boostY = y + height + spacing;
 
         this.healthbar.fillStyle(0x222b3a, 1);
@@ -272,7 +269,6 @@ export default class PlayerSystem {
             height
         );
 
-        // Boost foreground
         let boostColor = 0x22ccff;
 
         if (fuelPercent <= 0.25) {

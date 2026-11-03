@@ -26,7 +26,6 @@ export default function AnimatedStat({
             onComplete?.();
         };
 
-        // MULTIPLIER: instant update + small delay
         if (isMultiplier) {
             setCurrent(value);
 
@@ -59,8 +58,7 @@ export default function AnimatedStat({
                 }
             }, 120);
         }
-
-        // LARGE VALUES: smooth animation + looping sound
+        
         else {
             if (sounds?.scoreCounter) {
                 sounds.scoreCounter.currentTime = 0;

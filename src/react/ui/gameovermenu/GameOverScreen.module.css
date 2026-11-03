@@ -23,7 +23,6 @@
     font-family: "Courier New", monospace;
 }
 
-/* TITLE */
 h1 {
     margin: 0 0 20px;
     padding-bottom: 12px;
@@ -39,7 +38,6 @@ h1 {
     text-shadow: 2px 2px 0 #003333;
 }
 
-/* SECTION */
 .rewardSection {
     margin-top: 18px;
     padding-top: 16px;
@@ -57,7 +55,6 @@ h1 {
     letter-spacing: 4px;
 }
 
-/* BUTTONS */
 .buttons {
     margin-top: 25px;
 
@@ -65,7 +62,6 @@ h1 {
     gap: 16px;
 }
 
-/* RETRO BUTTON */
 .button {
     flex: 1;
     height: 42px;

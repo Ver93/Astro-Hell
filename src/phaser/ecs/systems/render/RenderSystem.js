@@ -1,6 +1,5 @@
 import STATUS_EFFECTS from "../../../data/damage/StatusEffects";
 import ENTITY_CATEGORY from "../../../data/entity/EntityCategory";
-import ENTITY_TYPE from "../../../data/entity/EntityType";
 
 export default class RenderSystem {
     constructor(game) {

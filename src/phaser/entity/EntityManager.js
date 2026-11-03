@@ -42,8 +42,6 @@ export default class EntityManager {
     }
 
     spawnEntity(category, entity_type) {
-
-        // Försök återanvända en inaktiv entity
         const ids = this.ecs.components[entity_type];
 
         if (ids) {
@@ -58,14 +56,11 @@ export default class EntityManager {
                 entity.entity_sprite_enabled = true;
                 entity.entity_collider_enabled = true;
 
-                // Återställ loot-status
                 entity.entity_loot_dropped = false;
 
-                // Återställ position
                 entity.entity_position_x = 0;
                 entity.entity_position_y = 0;
 
-                // Återställ hälsa och state
                 entity.entity_stats_health = entity.entity_stats_max_health;
                 entity.entity_state = ENTITY_STATE.IDLE;
 
@@ -73,7 +68,6 @@ export default class EntityManager {
             }
         }
 
-        // Skapa en ny entity om ingen inaktiv finns
         const factory = this.factories[category];
 
         if (!factory) {
@@ -99,7 +93,6 @@ export default class EntityManager {
         entity.entity_sprite_enabled = true;
         entity.entity_collider_enabled = true;
 
-        // Återställ loot-status
         entity.entity_loot_dropped = false;
 
         entity.entity_position_x = 0;
@@ -115,7 +108,6 @@ export default class EntityManager {
 
         if (!entity) return;
 
-        // Stoppa aktiva status effects
         for (const type in entity.entity_status_effects) {
 
             const effect = entity.entity_status_effects[type];

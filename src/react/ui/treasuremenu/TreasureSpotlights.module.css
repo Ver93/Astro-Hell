@@ -1,6 +1,3 @@
-/* =========================================
-   SPOTLIGHTS
-========================================= */
 
 .spotlightLeft,
 .spotlightRight {
@@ -18,8 +15,6 @@
     pointer-events: none;
 }
 
-/* LEFT */
-
 .spotlightLeft {
     left: clamp(-200px, -15vw, -70px);
 
@@ -32,8 +27,6 @@
 
     animation: spotlightLeftAnim 2.5s infinite alternate ease-in-out;
 }
-
-/* RIGHT */
 
 .spotlightRight {
     right: clamp(-200px, -15vw, -70px);
@@ -48,9 +41,6 @@
     animation: spotlightRightAnim 2.5s infinite alternate ease-in-out;
 }
 
-/* =========================================
-   ANIMATIONS
-========================================= */
 
 @keyframes spotlightLeftAnim {
     from {
@@ -72,10 +62,6 @@
     }
 }
 
-/* =========================================
-   MOBILE
-========================================= */
-
 @media (max-width: 600px) {
     .spotlightLeft,
     .spotlightRight {
@@ -92,10 +78,6 @@
     }
 }
 
-/* =========================================
-   MOBILE LANDSCAPE
-========================================= */
-
 @media (max-height: 500px) and (orientation: landscape) {
     .spotlightLeft,
     .spotlightRight {
@@ -105,10 +87,6 @@
         opacity: 0.35;
     }
 }
-
-/* =========================================
-   REDUCED MOTION
-========================================= */
 
 @media (prefers-reduced-motion: reduce) {
     .spotlightLeft,

@@ -57,7 +57,6 @@ export default class Game {
         this.entity = new EntityManager(this);
 
         this.context = new GameContext(this);
-
         this.particle = new ParticleManager(this);
 
         this.particle.add(
@@ -99,6 +98,7 @@ export default class Game {
         this.textPool = new DamageTextPool(this, 50);
         
         this.audio = new AudioManager(this);
+        
         this.audio.initialize();
         
         this.audio.addSound(SOUND.UPGRADE, 0.25);

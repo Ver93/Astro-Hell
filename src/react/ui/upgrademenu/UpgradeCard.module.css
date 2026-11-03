@@ -26,8 +26,6 @@
     transition: transform 80ms steps(1);
 }
 
-/* INNER */
-
 .cardInner {
     position: relative;
     width: 100%;
@@ -46,8 +44,6 @@
     overflow: hidden;
 }
 
-/* HEADER */
-
 .header {
     display: flex;
     align-items: center;
@@ -58,8 +54,6 @@
 
     border-bottom: 3px solid #3a3a44;
 }
-
-/* NAME */
 
 .name {
     min-width: 0;
@@ -77,8 +71,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-/* LEVEL */
 
 .level {
     flex-shrink: 0;
@@ -99,8 +91,6 @@
     background: #55c878;
     color: #102817;
 }
-
-/* ICON */
 
 .icon {
     flex: 1;
@@ -134,8 +124,6 @@
     transition: transform 80ms steps(1);
 }
 
-/* DESCRIPTION */
-
 .description {
     min-height: clamp(28px, 3vw, 38px);
 
@@ -151,8 +139,6 @@
     line-height: 1.4;
     text-align: left;
 }
-
-/* HOVER */
 
 .card:hover .icon img {
     transform: scale(1.08);
@@ -173,8 +159,6 @@
         inset -4px -4px 0 #17171e;
 }
 
-/* SELECTED */
-
 .selected {
     transform: translateY(-9px);
 }
@@ -194,8 +178,6 @@
 .selected:hover {
     transform: translate(-5px, -14px);
 }
-
-/* ENTRY ANIMATION */
 
 @keyframes cardEnter {
     0% {
@@ -222,16 +204,11 @@
     }
 }
 
-/* ACCESSIBILITY */
-
 .card:focus-visible {
     outline: 3px solid #ffd85a;
     outline-offset: 4px;
 }
 
-/* MOBILE */
-
-/* TABLET */
 @media (max-width: 1000px) {
     .cardWrapper {
         width: 260px;
@@ -240,7 +217,6 @@
     }
 }
 
-/* MOBILE */
 @media (max-width: 600px) {
     .cardWrapper {
         width: 100%;
@@ -269,7 +245,6 @@
     }
 }
 
-/* MOBILE LANDSCAPE */
 @media (max-height: 500px) and (orientation: landscape) {
     .cardWrapper {
         width: 190px;

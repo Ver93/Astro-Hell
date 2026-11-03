@@ -29,14 +29,12 @@ export default class DropSystem {
                 e.entity_loot_dropped
             ) continue;
 
-            // Markera direkt så fienden bara droppar en gång
             e.entity_loot_dropped = true;
 
             const x = e.entity_position_x;
             const y = e.entity_position_y;
             const luck = player.entity_passive_luck || 0;
 
-            // Alltid experience
             const exp = this.entityManager.spawnEntity(
                 ENTITY_CATEGORY.ITEM,
                 ENTITY_TYPE.ITEM_EXPERIENCE
@@ -45,49 +43,39 @@ export default class DropSystem {
             exp.entity_position_x = x;
             exp.entity_position_y = y;
 
-            // console.log("EXP DROPPED:", e.entity_id);
 
-            // Crystal
             if (Math.random() < 0.0001 * luck) {
                 this.spawnDrop(ENTITY_TYPE.ITEM_CRYSTAL, x, y);
             }
 
-            // Dynamite
             if (Math.random() < 0.0001 * luck) {
                 this.spawnDrop(ENTITY_TYPE.ITEM_DYNAMITE, x, y);
             }
 
-            // Treasure
             if (Math.random() < 0.0001 * (1 + luck)) {
                 this.spawnDrop(ENTITY_TYPE.ITEM_TREASURE, x, y);
             }
 
-            // Crown
             if (Math.random() < 0.0001 * luck) {
                 this.spawnDrop(ENTITY_TYPE.ITEM_CROWN, x, y);
             }
 
-            // Collector
             if (Math.random() < 0.001 * luck) {
                 this.spawnDrop(ENTITY_TYPE.ITEM_COLLECTOR, x, y);
             }
 
-            // Sapphire
             if (Math.random() < 0.001 * luck) {
                 this.spawnDrop(ENTITY_TYPE.ITEM_SAPPHIRE, x, y);
             }
 
-            // Ruby
             if (Math.random() < 0.001 * luck) {
                 this.spawnDrop(ENTITY_TYPE.ITEM_RUBY, x, y);
             }
 
-            // Topaz
             if (Math.random() < 0.001 * luck) {
                 this.spawnDrop(ENTITY_TYPE.ITEM_TOPAZ, x, y);
             }
 
-            // Diamond
             if (Math.random() < 0.001 * luck) {
                 this.spawnDrop(ENTITY_TYPE.ITEM_DIAMOND, x, y);
             }

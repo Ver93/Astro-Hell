@@ -4,7 +4,6 @@ export default class BootInitializer {
     }
 
     initialize(projectile, player, config, target) {
-        // Startposition
         const x = player.entity_position_x;
         const y = player.entity_position_y;
 
@@ -14,7 +13,6 @@ export default class BootInitializer {
         projectile.entity_start_position_x = x;
         projectile.entity_start_position_y = y;
 
-        // Boot animation parameters
         projectile.boot_time = 0;
         projectile.boot_speed = 0.005;
         projectile.boot_arc_height = 300;

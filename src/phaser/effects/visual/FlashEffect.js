@@ -21,19 +21,11 @@ export default class FlashEffect {
             ...options
         };
 
-        // ================================================
-        // FLASH
-        // ================================================
-
         sprite
             .setTint(config.color)
             .setTintMode(
                 Phaser.TintModes.FILL
             );
-
-        // ================================================
-        // ANIMATION
-        // ================================================
 
         this.scene.tweens.add({
 

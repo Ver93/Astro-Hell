@@ -30,8 +30,6 @@ export default class WeaponSystem {
     }
 
     update(dt, seconds) {
-
-        // Hämta alltid aktuell spelare
         const playerId = this.game.context.player;
 
         this.playerEntity = playerId != null
@@ -46,7 +44,6 @@ export default class WeaponSystem {
         this.playerWeapons =
             this.playerEntity.entity_weapon_slots || [];
 
-        // Hämta spatial system
         if (!this.spatial) {
             this.spatial =
                 this.game.systems.spatialSystem;
