@@ -24,7 +24,6 @@ import MoonPulseEffect from "./effects/particle/MoonPulseEffect.js";
 
 import DamageTextPool from "./effects/visual/DamageTextPool.js";
 import FlashEffect from "./effects/visual/FlashEffect.js";
-import RevolverEffect from "./effects/particle/RevolverEffect.js";
 import HoneyEffect from "./effects/particle/HoneyEffect.js";
 import AudioManager from "./sound/AudioManager.js";
 import SOUND from "../shared/data/sound/Sound.js";
@@ -85,11 +84,6 @@ export default class Game {
         );
 
         this.particle.add(
-            "revolver",
-            new RevolverEffect(this)
-        );
-
-        this.particle.add(
             "honey",
             new HoneyEffect(this)
         );
@@ -98,7 +92,7 @@ export default class Game {
         this.textPool = new DamageTextPool(this, 50);
         
         this.audio = new AudioManager(this);
-        
+
         this.audio.initialize();
         
         this.audio.addSound(SOUND.UPGRADE, 0.25);
